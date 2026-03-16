@@ -1,0 +1,552 @@
+[gd_scene format=3 uid="uid://i07545r78iac"]
+
+[ext_resource type="Script" uid="uid://cg5fungokpa3e" path="res://Scenes + Scripts/Editor/Boot/Editor - Boot Script.gd" id="1_lpaht"]
+[ext_resource type="Shader" uid="uid://bcl5y2iwkixjp" path="res://Assets/Shaders/Gradient Shader.gdshader" id="2_55sfw"]
+[ext_resource type="Theme" uid="uid://ceeybiro2pc87" path="res://Assets/Themes/Initialization/Initalization Theme.tres" id="3_vquke"]
+[ext_resource type="LabelSettings" uid="uid://byigyeoj4boet" path="res://Assets/Label Settings/Load Settings.tres" id="4_qi5vx"]
+[ext_resource type="StyleBox" uid="uid://b7dik2g44yr4l" path="res://Assets/Themes/Initialization/Styles/front_door_button_normal_inverse.tres" id="5_ji177"]
+[ext_resource type="Script" uid="uid://db1ices5tpaut" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Recent Adder.gd" id="5_vquke"]
+[ext_resource type="Texture2D" uid="uid://k3p8s8fagtn8" path="res://WoW Editor.png" id="6_ojwyg"]
+[ext_resource type="Script" uid="uid://cm0abjimn34l8" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Boot_Animation.gd" id="7_vfrra"]
+[ext_resource type="Script" uid="uid://bphogmmm3k5an" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Boot_Logo.gd" id="8_umjup"]
+[ext_resource type="Script" uid="uid://bhc851ivn7yd2" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Playable_Bunny.gd" id="9_f5las"]
+[ext_resource type="SpriteFrames" uid="uid://bsviuxpnwrexe" path="res://Assets/Sprites/Spriteframes/Editor Bunny Spriteframes.tres" id="10_e3un5"]
+[ext_resource type="Script" uid="uid://giibg5r1s02d" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Ball.gd" id="11_efr6v"]
+[ext_resource type="Texture2D" uid="uid://cimjmcfn1kcqo" path="res://Assets/Sprites/Ball Sprite.png" id="12_cbrw4"]
+[ext_resource type="PackedScene" uid="uid://dklc3b83eyisx" path="res://Scenes + Scripts/Editor/Loading/Editor Loading Scene.tscn" id="13_sxpn1"]
+[ext_resource type="Script" uid="uid://bwjaf5recme1f" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Open Adder.gd" id="14_55sfw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hbg6l"]
+shader = ExtResource("2_55sfw")
+shader_parameter/first_color = Color(0.03137255, 0, 0.03137255, 1)
+shader_parameter/second_color = Color(0.3254902, 0.14509805, 0.09019608, 1)
+shader_parameter/position = 0.9410001396975
+shader_parameter/color_angle = -2.54
+shader_parameter/stepIntensify = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7dtb3"]
+shader = ExtResource("2_55sfw")
+shader_parameter/first_color = Color(0.20485985, 0.08134445, 0.04374399, 1)
+shader_parameter/second_color = Color(0.032090727, 2.0553334e-06, 0.03209023, 1)
+shader_parameter/position = 0.5
+shader_parameter/color_angle = 1.5699999999999998
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_di7m1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpaht"]
+content_margin_top = 8.0
+content_margin_right = 6.0
+content_margin_bottom = 8.0
+bg_color = Color(0.20961013, 0.10070642, 3.6098065e-08, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+expand_margin_left = 10.0
+expand_margin_right = 7.0
+shadow_color = Color(0, 0, 0, 0.717647)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5nb5"]
+bg_color = Color(0.05490196, 0.07450981, 0.105882354, 1)
+corner_detail = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1lfc"]
+size = Vector2(139, 16)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3cweg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cweg"]
+size = Vector2(51, 58)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1lfc"]
+radius = 62.072536
+
+[sub_resource type="Animation" id="Animation_3cweg"]
+resource_name = "Jump Up"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Playable Bunny:allow_physics")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Playable Bunny:force_call_jump")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionZones/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.93),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_s1lfc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Playable Bunny:allow_physics")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Playable Bunny:force_call_jump")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionZones/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1lfc"]
+_data = {
+&"Jump Up": SubResource("Animation_3cweg"),
+&"RESET": SubResource("Animation_s1lfc")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7um56"]
+shader = ExtResource("2_55sfw")
+shader_parameter/first_color = Color(0.20392157, 0.08235294, 0.043137256, 1)
+shader_parameter/second_color = Color(0.07322379, 0.0074622068, 0, 1)
+shader_parameter/position = 0.7650001313375001
+shader_parameter/color_angle = 1.575
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7um56"]
+
+[sub_resource type="Animation" id="Animation_1y42n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_7um56"]
+resource_name = "Slide_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.46651652, 1),
+"update": 0,
+"values": [Vector2(-1100, 3), Vector2(-295, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_bq4qp"]
+resource_name = "Slide_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.46651652, 1),
+"update": 0,
+"values": [Vector2(-295, 3), Vector2(-1100, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1y42n"]
+_data = {
+&"RESET": SubResource("Animation_1y42n"),
+&"Slide_In": SubResource("Animation_7um56"),
+&"Slide_Out": SubResource("Animation_bq4qp")
+}
+
+[node name="Editor Boot Scene" type="Control" unique_id=379238214 node_paths=PackedStringArray("ball", "player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lpaht")
+ball = NodePath("Playable/Ball")
+player = NodePath("Playable/Playable Bunny")
+
+[node name="Content" type="PanelContainer" parent="." unique_id=1470922099]
+material = SubResource("ShaderMaterial_hbg6l")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_vquke")
+
+[node name="Projects" type="VBoxContainer" parent="Content" unique_id=240801460]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 12
+
+[node name="Editor" type="Label" parent="Content/Projects" unique_id=1579339377]
+layout_mode = 2
+text = "Recent Projects"
+label_settings = ExtResource("4_qi5vx")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Content/Projects" unique_id=1250410733]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Recents" type="VBoxContainer" parent="Content/Projects" unique_id=657827102]
+layout_mode = 2
+
+[node name="RecentsPanel" type="PanelContainer" parent="Content/Projects/Recents" unique_id=1830821962]
+material = SubResource("ShaderMaterial_7dtb3")
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="RecentScroll" type="ScrollContainer" parent="Content/Projects/Recents/RecentsPanel" unique_id=1428501690]
+layout_mode = 2
+
+[node name="RecentVBox" type="VBoxContainer" parent="Content/Projects/Recents/RecentsPanel/RecentScroll" unique_id=1575302015]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_vquke")
+
+[node name="Wiki_Button" type="Button" parent="Content/Projects" unique_id=397997399]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = ExtResource("5_ji177")
+text = "Game Wiki"
+
+[node name="Primary_Container" type="VBoxContainer" parent="Content" unique_id=689070265]
+z_index = 2
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Quickbar Holder" type="Control" parent="Content/Primary_Container" unique_id=1407766099]
+custom_minimum_size = Vector2(295, 0)
+layout_mode = 2
+
+[node name="Quickbar" type="VBoxContainer" parent="Content/Primary_Container/Quickbar Holder" unique_id=1371668980]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -323.00006
+offset_top = 28.999998
+offset_right = -67.0
+offset_bottom = 605.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.036871236
+theme_override_constants/separation = 17
+
+[node name="Logo" type="Control" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=508630477]
+custom_minimum_size = Vector2(256, 178)
+layout_mode = 2
+
+[node name="Logo_Texture" type="TextureRect" parent="Content/Primary_Container/Quickbar Holder/Quickbar/Logo" unique_id=1602519091]
+custom_minimum_size = Vector2(256, 260)
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 260.0
+pivot_offset = Vector2(128, 90)
+texture = ExtResource("6_ojwyg")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=2045062314]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=1942248341]
+layout_mode = 2
+theme_override_constants/separation = 43
+theme_override_styles/separator = SubResource("StyleBoxEmpty_di7m1")
+
+[node name="New_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=591549662]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 35
+text = "New Project"
+
+[node name="Open_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=2124986440]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("5_ji177")
+text = "Open Project"
+
+[node name="Project_Options_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=969454332]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpaht")
+text = "Project Options"
+
+[node name="Shortcuts" type="HBoxContainer" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=594288420]
+layout_mode = 2
+
+[node name="BootAnimation" type="PanelContainer" parent="." unique_id=1122394785]
+visible = false
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n5nb5")
+script = ExtResource("7_vfrra")
+
+[node name="Texture_Logo" type="TextureRect" parent="BootAnimation" unique_id=766012814]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ojwyg")
+stretch_mode = 5
+script = ExtResource("8_umjup")
+
+[node name="Playable" type="Node2D" parent="." unique_id=1221056044]
+
+[node name="CollisionZones" type="StaticBody2D" parent="Playable" unique_id=1935119018]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Playable/CollisionZones" unique_id=1048101805]
+position = Vector2(-4, 0)
+polygon = PackedVector2Array(-3, 0, -3, 648, 1152, 648, 1152, 0, 1178, 672, -38, 669)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Playable/CollisionZones" unique_id=671293470]
+position = Vector2(703, -676)
+shape = SubResource("RectangleShape2D_s1lfc")
+
+[node name="DeathBoundary" type="Area2D" parent="Playable" unique_id=1726679221]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Playable/DeathBoundary" unique_id=989296562]
+position = Vector2(591, 965)
+shape = SubResource("WorldBoundaryShape2D_3cweg")
+
+[node name="Playable Bunny" type="CharacterBody2D" parent="Playable" unique_id=330576339 groups=["Player"]]
+position = Vector2(344, 738)
+collision_layer = 3
+script = ExtResource("9_f5las")
+speed = 160.0
+gravity_multiplier = 2.0
+jump_velocity = -500.0
+roll_speed = 360.0
+acceleration = 800.0
+friction = 500.0
+air_friction = 200.0
+dash_horizontal_multiplier = 1.8
+dash_vertical_multiplier = 2.8
+
+[node name="Bunny_Sprite" type="AnimatedSprite2D" parent="Playable/Playable Bunny" unique_id=130790032]
+z_index = 4
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
+sprite_frames = ExtResource("10_e3un5")
+animation = &"Walk"
+
+[node name="Collision" type="CollisionShape2D" parent="Playable/Playable Bunny" unique_id=913561162]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_3cweg")
+
+[node name="RollAnimLoop" type="Timer" parent="Playable/Playable Bunny" unique_id=162190509]
+wait_time = 0.3
+one_shot = true
+
+[node name="LeftRay" type="RayCast2D" parent="Playable/Playable Bunny" unique_id=1693931206]
+
+[node name="RightRay" type="RayCast2D" parent="Playable/Playable Bunny" unique_id=1689771331]
+
+[node name="Ball" type="RigidBody2D" parent="Playable" unique_id=1514528317 groups=["Ball"]]
+position = Vector2(705.5, -757)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("11_efr6v")
+
+[node name="BallSprite" type="Sprite2D" parent="Playable/Ball" unique_id=828282511]
+modulate = Color(1, 1, 1, 0.8627451)
+z_index = 4
+texture_filter = 1
+scale = Vector2(4.02, 4.02)
+texture = ExtResource("12_cbrw4")
+
+[node name="BallCol" type="CollisionShape2D" parent="Playable/Ball" unique_id=1002504594 groups=["Ball"]]
+shape = SubResource("CircleShape2D_s1lfc")
+
+[node name="JumpAnimation" type="AnimationPlayer" parent="Playable" unique_id=1323872069]
+libraries/ = SubResource("AnimationLibrary_s1lfc")
+
+[node name="WaitTime" type="Timer" parent="Playable" unique_id=1451501607]
+wait_time = 2.5
+one_shot = true
+autostart = true
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="." unique_id=135606448]
+resources = [PackedStringArray("Editor Loading Scene"), [ExtResource("13_sxpn1")]]
+
+[node name="Open Project" type="Control" parent="." unique_id=2079489643]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.0
+offset_top = -243.0
+offset_right = 223.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Open Project" unique_id=200580141]
+material = SubResource("ShaderMaterial_7um56")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_right = 288.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_vquke")
+
+[node name="Open_Container" type="VBoxContainer" parent="Open Project/Panel" unique_id=1799641337]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=144701190]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=364761930]
+layout_mode = 2
+theme_override_constants/separation = 271
+theme_override_styles/separator = SubResource("StyleBoxEmpty_7um56")
+
+[node name="Project" type="Label" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=31959542]
+layout_mode = 2
+text = "Select A Project"
+label_settings = ExtResource("4_qi5vx")
+
+[node name="VSeparator2" type="VSeparator" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=596074157]
+layout_mode = 2
+theme_override_constants/separation = 210
+
+[node name="Back_Button" type="Button" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=1829899379]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("5_ji177")
+text = "Back"
+
+[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=1106186370]
+layout_mode = 2
+script = ExtResource("14_55sfw")
+
+[node name="Slider" type="AnimationPlayer" parent="Open Project" unique_id=299534847]
+libraries/ = SubResource("AnimationLibrary_1y42n")
+
+[node name="Project Conf" type="ConfirmationDialog" parent="." unique_id=1504725004]
+oversampling_override = 1.0
+position = Vector2i(275, 199)
+size = Vector2i(492, 104)
+ok_button_text = "Create"
+
+[node name="LineEdit" type="LineEdit" parent="Project Conf" unique_id=1785719085]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 484.0
+offset_bottom = 55.0
+placeholder_text = "Project Name Here"
+alignment = 1
+max_length = 260
+keep_editing_on_text_submit = true
+caret_blink = true
+
+[connection signal="pressed" from="Content/Projects/Wiki_Button" to="." method="Game_Wiki_Pressed"]
+[connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/New_Button" to="." method="New_Project_Button_Pressed"]
+[connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/Open_Button" to="." method="Open_Project_Button_Pressed"]
+[connection signal="body_entered" from="Playable/DeathBoundary" to="Playable/Playable Bunny" method="call_death"]
+[connection signal="body_entered" from="Playable/DeathBoundary" to="Playable/Ball" method="call_respawn"]
+[connection signal="timeout" from="Playable/WaitTime" to="." method="Call_Player"]
+[connection signal="pressed" from="Open Project/Panel/Open_Container/HBoxContainer/Back_Button" to="." method="Show_Initial"]
+[connection signal="animation_finished" from="Open Project/Slider" to="." method="Animation_Finished"]
+[connection signal="confirmed" from="Project Conf" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="text_changed" from="Project Conf/LineEdit" to="." method="_on_line_edit_text_changed"]

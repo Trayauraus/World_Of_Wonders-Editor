@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LevelEnvironmentData" format=3 uid="uid://bfmoebiwb03kg"]
+
+[ext_resource type="PackedScene" uid="uid://berfal88yn5wp" path="res://Resources - WoW/WoW Directional Lights/DARKEN World/RedDirectionalLightDARKER.tscn" id="1_qb04s"]
+[ext_resource type="PackedScene" uid="uid://denm10sddaerd" path="res://Resources - WoW/WoW Directional Lights/DARKEN World/RedDirectionalLightDARK.tscn" id="2_ep3iw"]
+[ext_resource type="Material" uid="uid://ciaou8irr8a2g" path="res://Resources - WoW/WoW Shader Process Materials/Particle Process RED.tres" id="3_24rq1"]
+[ext_resource type="Script" uid="uid://cmrgvffrxrye2" path="res://Resources - WoW/WoW Environment Resources/LevelEnvironmentData.gd" id="4_bh18w"]
+[ext_resource type="Environment" uid="uid://cq6v06gup6ukp" path="res://Resources - WoW/WoW Environments/WorldEnvironment.tres" id="5_jqgiv"]
+
+[resource]
+script = ExtResource("4_bh18w")
+ambient_color = Color(0.6745098, 0.16470589, 0.08627451, 0.8392157)
+cave_color = Color(0.105882354, 0.019607844, 0, 1)
+wind_color = Color(0.6313726, 0.14509805, 0.09411765, 1)
+world_env_normal = ExtResource("5_jqgiv")
+world_env_cave = ExtResource("5_jqgiv")
+gpu_particles_material = ExtResource("3_24rq1")
+dir_light_normal = ExtResource("2_ep3iw")
+dir_light_cave = ExtResource("1_qb04s")

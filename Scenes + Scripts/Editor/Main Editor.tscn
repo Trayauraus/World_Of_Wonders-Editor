@@ -1,0 +1,1220 @@
+[gd_scene format=3 uid="uid://ssb2irscqq0o"]
+
+[ext_resource type="Script" uid="uid://cphap82gi560b" path="res://Scenes + Scripts/Editor/Editor - Main Script.gd" id="1_qbtga"]
+[ext_resource type="StyleBox" uid="uid://bf7wrl0is1pq3" path="res://Assets/Themes/Project/project_panel.tres" id="2_22iwr"]
+[ext_resource type="TileSet" uid="uid://b7nk7a64rxedb" path="res://Assets/Sprites/Tileset/Universal Tileset.tres" id="2_80e1c"]
+[ext_resource type="StyleBox" uid="uid://yp2lcet2n6oy" path="res://Assets/Themes/Project/control_panel_style.tres" id="2_s276o"]
+[ext_resource type="LabelSettings" uid="uid://byigyeoj4boet" path="res://Assets/Label Settings/Load Settings.tres" id="3_fgkvh"]
+[ext_resource type="Theme" uid="uid://ceeybiro2pc87" path="res://Assets/Themes/Initialization/Initalization Theme.tres" id="3_jxbkj"]
+[ext_resource type="StyleBox" uid="uid://dghyl511t20vp" path="res://Assets/Themes/Project/project_panel_darker.tres" id="4_6xpy4"]
+[ext_resource type="Script" uid="uid://cggh4ascdjxd" path="res://Scenes + Scripts/Editor/Helper Scripts/Control Script.gd" id="4_ipvro"]
+[ext_resource type="StyleBox" uid="uid://dsf2wd63p4my6" path="res://Assets/Themes/Project/button_lighter.tres" id="7_6my6d"]
+[ext_resource type="Texture2D" uid="uid://k3p8s8fagtn8" path="res://WoW Editor.png" id="7_jh2va"]
+[ext_resource type="Texture2D" uid="uid://s7jl85sqhb3" path="res://Assets/Godot Editor Icons/Bunny Sleep.png" id="8_xr8lh"]
+[ext_resource type="StyleBox" uid="uid://cqpoass60ya7r" path="res://Assets/Themes/Project/button_lighter_pressed.tres" id="9_boxl5"]
+[ext_resource type="Texture2D" uid="uid://dgsscgagktkv0" path="res://Assets/Godot Editor Icons/Carrot.png" id="9_r1k6a"]
+[ext_resource type="Texture2D" uid="uid://cimjmcfn1kcqo" path="res://Assets/Sprites/Ball Sprite.png" id="9_y18pv"]
+[ext_resource type="Texture2D" uid="uid://305k2picieb6" path="res://Assets/Sprites/Editor Bunny Spritesheet.png" id="11_ffsf6"]
+[ext_resource type="Script" uid="uid://k7oh6klqg4a4" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Tileset Grabber.gd" id="11_na5ol"]
+[ext_resource type="Texture2D" uid="uid://cfe8s57cwnj0s" path="res://Assets/Godot Editor Icons/TileMap Square.png" id="12_1yklo"]
+[ext_resource type="Texture2D" uid="uid://dgjhp8ny31wcj" path="res://Assets/Godot Editor Icons/Coin.png" id="13_v5tc5"]
+[ext_resource type="Texture2D" uid="uid://dfno4046debhn" path="res://Resources - WoW/WoW Backgrounds/Background.png" id="15_5x6n5"]
+[ext_resource type="Shader" uid="uid://bcl5y2iwkixjp" path="res://Assets/Shaders/Gradient Shader.gdshader" id="15_ksenb"]
+[ext_resource type="Texture2D" uid="uid://emh01ko34712" path="res://Assets/Godot Editor Icons/Enemy.png" id="15_wrdkv"]
+[ext_resource type="StyleBox" uid="uid://b7dik2g44yr4l" path="res://Assets/Themes/Initialization/Styles/front_door_button_normal_inverse.tres" id="16_6ccjt"]
+[ext_resource type="StyleBox" uid="uid://cjlryc0y3mhts" path="res://Assets/Themes/Project/Stylebox Brown Unrounded.tres" id="17_6ccjt"]
+[ext_resource type="Script" uid="uid://dbvyunt25h7il" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control_Buttons - File.gd" id="17_ancft"]
+[ext_resource type="Script" uid="uid://7p6t85y5ix66" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control_Buttons - Options.gd" id="19_l3pgt"]
+[ext_resource type="Script" uid="uid://b158g5d2se6xo" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control_Buttons - Export.gd" id="19_sa5po"]
+[ext_resource type="Script" uid="uid://bwjaf5recme1f" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Open Adder.gd" id="20_i2dkp"]
+
+[sub_resource type="Theme" id="Theme_6xpy4"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/font_sizes/font_size = 16
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = ExtResource("2_s276o")
+Button/styles/pressed = null
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xr8lh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffsf6"]
+bg_color = Color(0.12156863, 0.043137256, 0.03137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na5ol"]
+bg_color = Color(0.12156863, 0.043137256, 0.03137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipvro"]
+bg_color = Color(0.27058825, 0.12941177, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky174"]
+bg_color = Color(0.27252173, 0.12764427, 0.104923986, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ksenb"]
+
+[sub_resource type="Gradient" id="Gradient_ky174"]
+colors = PackedColorArray(0.3553136, 0.35531354, 0.35531357, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ksenb"]
+gradient = SubResource("Gradient_ky174")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Theme" id="Theme_na5ol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3pgt"]
+content_margin_left = 6.0
+content_margin_top = 8.0
+content_margin_right = 6.0
+content_margin_bottom = 8.0
+bg_color = Color(0.14468789, 0.06252443, 1.8049032e-08, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+shadow_color = Color(0, 0, 0, 0.717647)
+shadow_size = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ancft"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(0.20392157, 0.08235294, 0.043137256, 1)
+shader_parameter/second_color = Color(0.07322379, 0.0074622068, 0, 1)
+shader_parameter/position = 0.7650001313375001
+shader_parameter/color_angle = 1.575
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sa5po"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ccjt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ccjt"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(0.20392157, 0.08235294, 0.043137256, 1)
+shader_parameter/second_color = Color(0.07450981, 0.007843138, 0, 1)
+shader_parameter/position = 0.7650001313375001
+shader_parameter/color_angle = 14.136
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ancft"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa5po"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(0.3102479, 0.1212408, 7.219613e-08, 1)
+shader_parameter/second_color = Color(0.74843013, 0.18521473, 0, 1)
+shader_parameter/position = 0.5
+shader_parameter/color_angle = 1.5699999999999998
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="Animation" id="Animation_ancft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control_Menu_Dropdown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ksenb"]
+resource_name = "Slide_In_Content"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control_Menu_Dropdown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.6597538, 1),
+"update": 0,
+"values": [Vector2(0, -650), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6ccjt"]
+resource_name = "Slide_Out_Content"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control_Menu_Dropdown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.6372804, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -650)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ancft"]
+_data = {
+&"RESET": SubResource("Animation_ancft"),
+&"Slide_In_Content": SubResource("Animation_ksenb"),
+&"Slide_Out_Content": SubResource("Animation_6ccjt")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5x6n5"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(0.20392157, 0.08235294, 0.043137256, 1)
+shader_parameter/second_color = Color(0.07322379, 0.0074622068, 0, 1)
+shader_parameter/position = 0.7650001313375001
+shader_parameter/color_angle = 1.575
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y18pv"]
+
+[sub_resource type="Animation" id="Animation_i2dkp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l3pgt"]
+resource_name = "Slide_Panel_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.46651644, 1),
+"update": 0,
+"values": [Vector2(0, -650), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5x6n5"]
+resource_name = "Slide_Panel_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.70710677, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -650)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y18pv"]
+_data = {
+&"RESET": SubResource("Animation_i2dkp"),
+&"Slide_Panel_In": SubResource("Animation_l3pgt"),
+&"Slide_Panel_Out": SubResource("Animation_5x6n5")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2dkp"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(1, 0.67724437, 0.6106396, 1)
+shader_parameter/second_color = Color(1, 1, 1, 1)
+shader_parameter/position = -0.293999918965
+shader_parameter/color_angle = 0.845
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3pgt"]
+shader = ExtResource("15_ksenb")
+shader_parameter/first_color = Color(1, 1, 1, 1)
+shader_parameter/second_color = Color(0.8524442, 0.5848537, 0.49951768, 1)
+shader_parameter/position = 0.5
+shader_parameter/color_angle = 1.565
+shader_parameter/stepIntensify = 10
+
+[node name="Editor" type="Control" unique_id=1550646374 node_paths=PackedStringArray("environment", "background", "player", "editor_camera", "main_tilemap", "bg_tilemap", "main_layer_checkbox", "rectangle_tool_checkbox", "tool_list", "tool_label", "err_panel", "err_timer", "err_text")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qbtga")
+environment = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/WorldEnvironment")
+background = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Editor_Viewport_Camera/Background_Sprite")
+player = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Player - Bunny Sprite")
+editor_camera = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Editor_Viewport_Camera")
+main_tilemap = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Main Tileset")
+bg_tilemap = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")
+main_layer_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Main_Tilemap")
+rectangle_tool_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Rectangle_Tool")
+tileset_source_id = 4
+tool_list = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox")
+tool_label = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header/Header_SubLabel")
+err_panel = NodePath("Error Panel")
+err_timer = NodePath("Error Panel/Err_Timeout_Timer")
+err_text = NodePath("Error Panel/Error Message")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=967403746]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(43)
+dragging_enabled = false
+dragger_visibility = 2
+split_offset = 43
+
+[node name="ControlContainer" type="PanelContainer" parent="VSplitContainer" unique_id=503494172 node_paths=PackedStringArray("main_editor", "main_file_button", "main_options_button", "main_export_button")]
+layout_mode = 2
+theme = SubResource("Theme_6xpy4")
+theme_override_styles/panel = ExtResource("4_6xpy4")
+script = ExtResource("4_ipvro")
+main_editor = NodePath("..")
+main_file_button = NodePath("../../Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/New_Button")
+main_options_button = NodePath("../../Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer/TG_BG_Button")
+main_export_button = NodePath("../../Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer/Export_Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/ControlContainer" unique_id=1372428866]
+layout_mode = 2
+
+[node name="File_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=883611407]
+layout_mode = 2
+text = "File"
+
+[node name="Options_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1564248429]
+layout_mode = 2
+text = "Options"
+
+[node name="Export_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1955156149]
+layout_mode = 2
+text = "Export"
+
+[node name="Help_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=733256399]
+layout_mode = 2
+text = "Help"
+
+[node name="Properties_Label_Container" type="HBoxContainer" parent="VSplitContainer/ControlContainer" unique_id=1604582168]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Header_Label" type="Label" parent="VSplitContainer/ControlContainer/Properties_Label_Container" unique_id=14525959]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Properties"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="VSplitContainer/ControlContainer/Properties_Label_Container" unique_id=154741011]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer" unique_id=172963560]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/split_bar_background = ExtResource("2_22iwr")
+split_offsets = PackedInt32Array(208, 1000)
+dragger_visibility = 2
+split_offset = 208
+
+[node name="ToolList" type="PanelContainer" parent="VSplitContainer/HSplitContainer" unique_id=1004615166]
+layout_mode = 2
+theme = ExtResource("3_jxbkj")
+theme_override_styles/panel = ExtResource("4_6xpy4")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/HSplitContainer/ToolList" unique_id=247285957]
+layout_mode = 2
+
+[node name="ScrollContent" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer" unique_id=382171088]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent" unique_id=836910980]
+layout_mode = 2
+
+[node name="Header_Label" type="Label" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header" unique_id=1431828593]
+layout_mode = 2
+text = "Tools"
+label_settings = ExtResource("3_fgkvh")
+horizontal_alignment = 1
+
+[node name="Header_SubLabel" type="Label" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header" unique_id=731346981]
+layout_mode = 2
+text = "Selected"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header" unique_id=332360753]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Tool_List_VBox" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent" unique_id=1265112326]
+layout_mode = 2
+
+[node name="Tool_Select" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=2128952332]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Select"
+icon = ExtResource("9_y18pv")
+expand_icon = true
+
+[node name="Tool_PlayerButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=64102119]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Player Placement"
+icon = ExtResource("8_xr8lh")
+expand_icon = true
+
+[node name="Tool_TilemapButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=858554440]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Tilemap"
+icon = ExtResource("12_1yklo")
+expand_icon = true
+
+[node name="Tileset_Options" type="OptionButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=1959184323]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ky174")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ksenb")
+selected = 0
+item_count = 3
+popup/item_0/text = "World"
+popup/item_0/id = 0
+popup/item_1/text = "Castle"
+popup/item_1/id = 1
+popup/item_2/text = "Castle (BG)"
+popup/item_2/id = 2
+
+[node name="Tool_CarrotButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=201779373]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Carrot"
+icon = ExtResource("9_r1k6a")
+expand_icon = true
+
+[node name="Tool_CollisionButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=954148693]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Collision Zones"
+icon = SubResource("GradientTexture2D_ksenb")
+expand_icon = true
+
+[node name="Tool_CoinButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=561440726]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Coins"
+icon = ExtResource("13_v5tc5")
+expand_icon = true
+
+[node name="Tool_EnemyButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=18254373]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Enemies"
+icon = ExtResource("15_wrdkv")
+expand_icon = true
+
+[node name="Tool_Button" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=1077254101]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("7_6my6d")
+theme_override_styles/hover_pressed = ExtResource("9_boxl5")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+toggle_mode = true
+text = "Placeholder"
+icon = ExtResource("7_jh2va")
+
+[node name="Special_List" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent" unique_id=1062761508]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Special_Label" type="Label" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=800408308]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Special"
+horizontal_alignment = 1
+
+[node name="Main_Tilemap" type="CheckButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=218274769]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ky174")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ksenb")
+button_pressed = true
+text = "Is Main Tilemap"
+
+[node name="Rectangle_Tool" type="CheckButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=289335460]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ky174")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ksenb")
+text = "Rectangle Mode"
+
+[node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=1822677916]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=1396684567]
+custom_minimum_size = Vector2(0, 135)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TileGridContainer" type="GridContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/ScrollContainer" unique_id=607888401 node_paths=PackedStringArray("main_tilemap", "bg_tilemap", "main_tilemap_check_button", "rectangle_check_button", "editor_script")]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_na5ol")
+columns = 8
+script = ExtResource("11_na5ol")
+main_tilemap = NodePath("../../../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/Main Tileset")
+bg_tilemap = NodePath("../../../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")
+main_tilemap_check_button = NodePath("../../Main_Tilemap")
+rectangle_check_button = NodePath("../../Rectangle_Tool")
+editor_script = NodePath("../../../../../../../..")
+
+[node name="Viewport" type="PanelContainer" parent="VSplitContainer/HSplitContainer" unique_id=922613478]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_22iwr")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VSplitContainer/HSplitContainer/Viewport" unique_id=969735433]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer" unique_id=254111710]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(772, 593)
+render_target_update_mode = 4
+
+[node name="Main_Scene" type="Node2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport" unique_id=1002988290]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=1179342828]
+
+[node name="BG Tileset" type="TileMapLayer" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=2055510317]
+texture_filter = 1
+tile_set = ExtResource("2_80e1c")
+
+[node name="Player - Bunny Sprite" type="Sprite2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=165437083]
+texture_filter = 1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_ffsf6")
+region_enabled = true
+region_rect = Rect2(35, 4, 24, 26)
+
+[node name="Main Tileset" type="TileMapLayer" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=955918570]
+texture_filter = 1
+tile_set = ExtResource("2_80e1c")
+
+[node name="Editor_Viewport_Camera" type="Camera2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport" unique_id=470025141]
+limit_enabled = false
+
+[node name="Background_Sprite" type="Sprite2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Editor_Viewport_Camera" unique_id=409650838]
+visible = false
+z_index = -1
+texture_filter = 1
+scale = Vector2(10, 10)
+texture = ExtResource("15_5x6n5")
+
+[node name="PropertyList" type="PanelContainer" parent="VSplitContainer/HSplitContainer" unique_id=1629431645]
+layout_mode = 2
+theme = ExtResource("3_jxbkj")
+theme_override_styles/panel = ExtResource("4_6xpy4")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/HSplitContainer/PropertyList" unique_id=1700800206]
+layout_mode = 2
+
+[node name="ScrollContent" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer" unique_id=939104730]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=1688170517]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Header" unique_id=1911897471]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="List" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=490437870]
+layout_mode = 2
+
+[node name="Environment_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=69729082]
+layout_mode = 2
+text = "Environment"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=468507029]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_l3pgt")
+selected = 0
+item_count = 6
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Lava"
+popup/item_1/id = 1
+popup/item_2/text = "Lava Dark"
+popup/item_2/id = 2
+popup/item_3/text = "Desert"
+popup/item_3/id = 3
+popup/item_4/text = "Ice"
+popup/item_4/id = 4
+popup/item_5/text = "Grass"
+popup/item_5/id = 5
+
+[node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1427258595]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Selected_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=719639798]
+layout_mode = 2
+text = "Selected"
+horizontal_alignment = 1
+
+[node name="Property_Button" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2079566296]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 1"
+
+[node name="Property_Button2" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1768282114]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 2"
+
+[node name="Property_Button3" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=455959985]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 3"
+expand_icon = true
+
+[node name="Property_Button4" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1959061579]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 4"
+
+[node name="Property_Button5" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1426252724]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 5"
+
+[node name="Property_Button6" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=316338910]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 6"
+
+[node name="Property_Button7" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1437549906]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 7"
+
+[node name="Property_Button8" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1435194362]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 8"
+
+[node name="Property_Button9" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=850015913]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 9"
+
+[node name="Property_Button10" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=585271025]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 10"
+expand_icon = true
+
+[node name="Property_Button11" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2000299052]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 11"
+
+[node name="Property_Button12" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=933418337]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 12"
+
+[node name="Property_Button13" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1853178689]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = ExtResource("2_s276o")
+theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Property 13"
+
+[node name="Control_Menu_Dropdown" type="Control" parent="." unique_id=728104496]
+visible = false
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control_Menu_Dropdown" unique_id=606812418]
+material = SubResource("ShaderMaterial_ancft")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_jxbkj")
+
+[node name="Control_Menu_Container" type="VBoxContainer" parent="Control_Menu_Dropdown/Panel" unique_id=347733899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top_Container" type="HBoxContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container" unique_id=700110843]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container" unique_id=339681092]
+layout_mode = 2
+theme_override_constants/separation = 461
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sa5po")
+
+[node name="Project" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container" unique_id=2015425401]
+layout_mode = 2
+text = "Select Option"
+label_settings = ExtResource("3_fgkvh")
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container" unique_id=1813178929]
+layout_mode = 2
+theme_override_constants/separation = 389
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6ccjt")
+
+[node name="Back_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container" unique_id=387974854]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("16_6ccjt")
+text = "Back"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container" unique_id=1104310564]
+layout_mode = 2
+size_flags_vertical = 3
+split_offsets = PackedInt32Array(348, 380, 760, 792)
+dragging_enabled = false
+dragger_visibility = 2
+split_offset = 348
+
+[node name="File Container" type="PanelContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer" unique_id=1634477374 node_paths=PackedStringArray("main_node", "main_tileset", "bg_tileset", "confirm_label", "project_ver", "dialogue_box", "open_project", "slider_animations", "click_timer")]
+material = SubResource("ShaderMaterial_6ccjt")
+layout_mode = 2
+script = ExtResource("17_ancft")
+main_node = NodePath("../../../../..")
+main_tileset = NodePath("../../../../../VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Main Tileset")
+bg_tileset = NodePath("../../../../../VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")
+confirm_label = NodePath("VBoxContainer/Confirm_Label")
+project_ver = NodePath("VBoxContainer/Project Ver Label")
+dialogue_box = NodePath("../../../../../New Project")
+open_project = NodePath("../../../../../Open Project")
+slider_animations = NodePath("../../../../../Open Project/Slider_Animations")
+click_timer = NodePath("ClickTimer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" unique_id=1152315091]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1072117354]
+layout_mode = 2
+theme_override_constants/separation = 37
+
+[node name="Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=791875651]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "File"
+horizontal_alignment = 1
+
+[node name="HSeperator_Blank" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1343531678]
+layout_mode = 2
+theme_override_constants/separation = 28
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="New_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=220991003]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+text = "New Project"
+
+[node name="HSeperator_Blank2" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=426053290]
+layout_mode = 2
+theme_override_constants/separation = 31
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Open_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1080949705]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+text = "Open Project"
+
+[node name="HSeperator_Blank3" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1876195395]
+layout_mode = 2
+theme_override_constants/separation = 37
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Save_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=2056801162]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+text = "Save Project"
+
+[node name="HSeperator_Blank4" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=2061047301]
+layout_mode = 2
+theme_override_constants/separation = 44
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Quit_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1792894182]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+text = "Quit Project"
+
+[node name="Confirm_Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=664554690]
+visible = false
+layout_mode = 2
+text = "Press Again To CONFIRM"
+horizontal_alignment = 1
+
+[node name="HSeperator_Blank5" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1554107735]
+layout_mode = 2
+theme_override_constants/separation = 150
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Project Ver Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1112755258]
+layout_mode = 2
+text = "Project Version:"
+
+[node name="ClickTimer" type="Timer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" unique_id=122906552]
+wait_time = 0.5
+
+[node name="SeperatorL" type="PanelContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer" unique_id=1741026901]
+material = SubResource("ShaderMaterial_sa5po")
+layout_mode = 2
+
+[node name="Options Container" type="PanelContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer" unique_id=2093293669 node_paths=PackedStringArray("tg_bg_button", "tg_bg_tiles_button", "tg_env_button", "tg_collision_button", "background")]
+material = SubResource("ShaderMaterial_6ccjt")
+layout_mode = 2
+script = ExtResource("19_l3pgt")
+tg_bg_button = NodePath("VBoxContainer/TG_BG_Button")
+tg_bg_tiles_button = NodePath("VBoxContainer/TG_BG_Tiles_Button")
+tg_env_button = NodePath("VBoxContainer/TG_Environment_Button")
+tg_collision_button = NodePath("VBoxContainer/TG_Collision_Button")
+background = NodePath("../../../../../VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Editor_Viewport_Camera/Background_Sprite")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container" unique_id=58494227]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=338401100]
+layout_mode = 2
+theme_override_constants/separation = 37
+
+[node name="Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=1136396699]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Options"
+horizontal_alignment = 1
+
+[node name="HSeperator_Blank" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=936569438]
+layout_mode = 2
+theme_override_constants/separation = 28
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="TG_BG_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=1944150693]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+toggle_mode = true
+text = "Enable BG"
+
+[node name="HSeperator_Blank2" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=1319942661]
+layout_mode = 2
+theme_override_constants/separation = 31
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="TG_BG_Tiles_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=11236038]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+toggle_mode = true
+text = "Hide BG Tiles"
+
+[node name="HSeperator_Blank3" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=1257854900]
+layout_mode = 2
+theme_override_constants/separation = 37
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="TG_Environment_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=121459752]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+toggle_mode = true
+text = "Enable Environments"
+
+[node name="HSeperator_Blank4" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=556129345]
+layout_mode = 2
+theme_override_constants/separation = 44
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="TG_Collision_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=691037906]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+toggle_mode = true
+text = "Hide Collision Shapes"
+
+[node name="SeperatorR" type="PanelContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer" unique_id=729486035]
+material = SubResource("ShaderMaterial_sa5po")
+layout_mode = 2
+
+[node name="Export Container" type="PanelContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer" unique_id=1531010847 node_paths=PackedStringArray("main_node", "main_tileset", "bg_tileset", "godot_ver_label")]
+material = SubResource("ShaderMaterial_6ccjt")
+layout_mode = 2
+script = ExtResource("19_sa5po")
+main_node = NodePath("../../../../..")
+main_tileset = NodePath("../../../../../VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Main Tileset")
+bg_tileset = NodePath("../../../../../VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")
+godot_ver_label = NodePath("VBoxContainer/Godot Ver Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container" unique_id=1309356195]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=369874731]
+layout_mode = 2
+theme_override_constants/separation = 37
+
+[node name="Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=1077479747]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Export"
+horizontal_alignment = 1
+
+[node name="HSeperator_Blank" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=1356336480]
+layout_mode = 2
+theme_override_constants/separation = 28
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Export_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=999549048]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("17_6ccjt")
+theme_override_styles/hover = ExtResource("17_6ccjt")
+text = "Export Project"
+
+[node name="HSeperator_Blank5" type="HSeparator" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=575438770]
+layout_mode = 2
+theme_override_constants/separation = 145
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
+
+[node name="Godot Ver Label" type="Label" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=329608566]
+layout_mode = 2
+text = "Godot Version:"
+horizontal_alignment = 2
+
+[node name="Slide_Animations" type="AnimationPlayer" parent="." unique_id=1920505743]
+libraries/ = SubResource("AnimationLibrary_ancft")
+
+[node name="New Project" type="ConfirmationDialog" parent="." unique_id=464920650]
+oversampling_override = 1.0
+position = Vector2i(275, 199)
+size = Vector2i(492, 104)
+ok_button_text = "Create"
+
+[node name="LineEdit" type="LineEdit" parent="New Project" unique_id=1599530584]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 484.0
+offset_bottom = 55.0
+placeholder_text = "Project Name Here"
+alignment = 1
+max_length = 260
+keep_editing_on_text_submit = true
+caret_blink = true
+
+[node name="Open Project" type="Control" parent="." unique_id=1371723323]
+visible = false
+z_index = 6
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Open Project" unique_id=1837001745]
+material = SubResource("ShaderMaterial_5x6n5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_jxbkj")
+
+[node name="Open_Container" type="VBoxContainer" parent="Open Project/Panel" unique_id=1143471519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=1015363113]
+layout_mode = 2
+alignment = 1
+
+[node name="Project" type="Label" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=169572223]
+layout_mode = 2
+text = "Select A Project"
+label_settings = ExtResource("3_fgkvh")
+
+[node name="VSeparator" type="VSeparator" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=1186393769]
+layout_mode = 2
+theme_override_constants/separation = 783
+theme_override_styles/separator = SubResource("StyleBoxEmpty_y18pv")
+
+[node name="Back_Button" type="Button" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=1689547054]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("16_6ccjt")
+text = "Back"
+
+[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=106817281]
+layout_mode = 2
+script = ExtResource("20_i2dkp")
+
+[node name="Slider_Animations" type="AnimationPlayer" parent="Open Project" unique_id=1280520548]
+libraries/ = SubResource("AnimationLibrary_y18pv")
+
+[node name="Error Panel" type="Panel" parent="." unique_id=1530193877]
+visible = false
+z_index = 10
+material = SubResource("ShaderMaterial_i2dkp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Error Panel" unique_id=188482413]
+material = SubResource("ShaderMaterial_l3pgt")
+layout_mode = 0
+offset_left = 200.0
+offset_top = 265.0
+offset_right = 949.0
+offset_bottom = 386.0
+
+[node name="Err Label" type="Label" parent="Error Panel" unique_id=1914641869]
+layout_mode = 0
+offset_top = 274.0
+offset_right = 1152.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.99988467, 0.08314913, 0.2913574, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 0.5254902, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 72
+text = "AN ERROR OCCURED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Error Message" type="Label" parent="Error Panel" unique_id=806268486]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 388.0
+offset_right = 948.0
+offset_bottom = 427.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Error Message"
+horizontal_alignment = 1
+
+[node name="Err_Timeout_Timer" type="Timer" parent="Error Panel" unique_id=1044644138]
+wait_time = 3.0
+
+[connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/File_Button" to="VSplitContainer/ControlContainer" method="_on_file_button_pressed"]
+[connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Options_Button" to="VSplitContainer/ControlContainer" method="_on_options_button_pressed"]
+[connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Export_Button" to="VSplitContainer/ControlContainer" method="_on_export_button_pressed"]
+[connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Help_Button" to="VSplitContainer/ControlContainer" method="_on_help_button_pressed"]
+[connection signal="item_selected" from="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox/Tileset_Options" to="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/ScrollContainer/TileGridContainer" method="Tilemap_Selected"]
+[connection signal="item_selected" from="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List/OptionButton" to="." method="Call_Environment_Change"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container/Back_Button" to="VSplitContainer/ControlContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/New_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_New_Project"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/Open_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Open_Project"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/Save_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Save_Project"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/Quit_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Quit_Project"]
+[connection signal="timeout" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/ClickTimer" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Click_Timer_Timeout"]
+[connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer/Export_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container" method="Call_Export"]
+[connection signal="confirmed" from="New Project" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="_on_confirmation_dialog_confirmed"]
+[connection signal="text_changed" from="New Project/LineEdit" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="LEdit_Text_changed"]
+[connection signal="pressed" from="Open Project/Panel/Open_Container/HBoxContainer/Back_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Back_From_Open"]
+[connection signal="timeout" from="Error Panel/Err_Timeout_Timer" to="." method="Hide_Error"]

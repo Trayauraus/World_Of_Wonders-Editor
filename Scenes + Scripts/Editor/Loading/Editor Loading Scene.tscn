@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://dklc3b83eyisx"]
+
+[ext_resource type="Texture2D" uid="uid://k3p8s8fagtn8" path="res://WoW Editor.png" id="1_gcysi"]
+[ext_resource type="Script" uid="uid://c3rcrfsiearhv" path="res://Scenes + Scripts/Editor/Loading/Editor - Loading Scene.gd" id="1_ld4am"]
+[ext_resource type="Script" uid="uid://cwhnv52ej4qog" path="res://Scenes + Scripts/Editor/Loading/Helper Scripts/Helper - Load Label.gd" id="2_fi6fj"]
+[ext_resource type="LabelSettings" uid="uid://byigyeoj4boet" path="res://Assets/Label Settings/Load Settings.tres" id="2_ld4am"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6fj"]
+bg_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fi6fj"]
+font_size = 20
+font_color = Color(1, 0.21176471, 0.21176471, 1)
+
+[node name="Boot_SceneEditor" type="Control" unique_id=137394670 node_paths=PackedStringArray("err_button", "err_label", "load_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ld4am")
+err_button = NodePath("Panel/ScrollContainer/VBox/VBox_Status/Err Button")
+err_label = NodePath("Panel/ScrollContainer/VBox/VBox_Status/Err Label")
+load_label = NodePath("Panel/ScrollContainer/VBox/VBox_Status/Label_Load")
+
+[node name="Panel" type="Panel" parent="." unique_id=1446750885]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi6fj")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1587113484]
+custom_minimum_size = Vector2(620, 280)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -374.0
+offset_top = -305.0
+offset_right = 374.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/ScrollContainer" unique_id=947134154]
+custom_minimum_size = Vector2(740, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/ScrollContainer/VBox" unique_id=413919475]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_gcysi")
+expand_mode = 2
+
+[node name="VBox_Status" type="VBoxContainer" parent="Panel/ScrollContainer/VBox" unique_id=12310470]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label_Load" type="Label" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=958115440]
+layout_mode = 2
+text = "LOADING..."
+label_settings = ExtResource("2_ld4am")
+horizontal_alignment = 1
+visible_characters_behavior = 1
+script = ExtResource("2_fi6fj")
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=601561433]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=383397784]
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=334729981]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_fi6fj")
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Label" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=796464207]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_fi6fj")
+horizontal_alignment = 1
+
+[node name="Err Button" type="Button" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=895149595]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.21176471, 0.21176471, 1)
+theme_override_font_sizes/font_size = 20
+text = "ERROR OCCURED.
+Press Me To Return."
+flat = true
+
+[node name="Err Label" type="Label" parent="Panel/ScrollContainer/VBox/VBox_Status" unique_id=1867743865]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Specific Error:"
+horizontal_alignment = 1
