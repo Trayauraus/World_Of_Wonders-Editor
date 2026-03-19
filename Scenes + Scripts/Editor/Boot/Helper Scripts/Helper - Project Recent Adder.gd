@@ -11,18 +11,40 @@ func populate_recent_projects():
 	for child in get_children():
 		child.queue_free()
 
-	# Loop through our loaded metadata array
-	for meta in GlobalEditor.recently_opened:
+	var list_changed = false
+	
+	# Loop backwards to safely remove invalid/missing projects
+	for i in range(GlobalEditor.recently_opened.size() - 1, -1, -1):
+		var meta = GlobalEditor.recently_opened[i]
 		if not meta is ProjectMetaData:
+			GlobalEditor.recently_opened.remove_at(i)
+			list_changed = true
 			continue
 			
+		# Construct paths to verify existence
+		var safe_name = get_safe_filename(meta.project_name)
+		var project_folder_path = "user://Project Data/" + safe_name
+		var dat_file_path = project_folder_path + "/project_data.dat"
+		
+		# Check if directory AND the dat file still exist
+		if not DirAccess.dir_exists_absolute(project_folder_path) or not FileAccess.file_exists(dat_file_path):
+			print_rich("[color=orange]Missing data for recent project:[/color] ", meta.project_name, "- Removing from list.")
+			GlobalEditor.recently_opened.remove_at(i)
+			list_changed = true
+
+	# If we had to prune the list, save it back to the config
+	if list_changed:
+		GlobalEditor.config.set_value("Editor", "recently_opened", GlobalEditor.recently_opened)
+		GlobalEditor.Call_Config_Save()
+
+	# Loop through our cleaned metadata array to build the UI
+	for meta in GlobalEditor.recently_opened:
 		# Container to hold the button and the info labels below it
 		var project_vbox = VBoxContainer.new()
 		project_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		
 		# The core open button
 		var btn = Button.new()
-		
 		
 		# 1. Create a reusable style for the "Normal" state
 		var style_normal = StyleBoxFlat.new()
@@ -41,8 +63,6 @@ func populate_recent_projects():
 		# If you want the text to be a specific color (e.g., White)
 		btn.add_theme_color_override("font_color", Color.WHITE)
 		
-		
-		
 		btn.text = meta.project_name
 		
 		# Bind the metadata to our custom pressed function
@@ -51,7 +71,7 @@ func populate_recent_projects():
 		# HBox to hold the left and right labels underneath
 		var hbox = HBoxContainer.new()
 		
-		# Left Label - showing the Project Ver and Date (since you requested both)
+		# Left Label - showing the Project Ver and Date
 		var left_lbl = Label.new()
 		left_lbl.text = "Date: " + meta.creation_date + " | Ver: " + meta.project_version
 		left_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL # Pushes right side away

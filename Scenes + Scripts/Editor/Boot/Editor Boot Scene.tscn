@@ -8,11 +8,16 @@
 [ext_resource type="Script" uid="uid://db1ices5tpaut" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Recent Adder.gd" id="5_vquke"]
 [ext_resource type="Texture2D" uid="uid://k3p8s8fagtn8" path="res://WoW Editor.png" id="6_ojwyg"]
 [ext_resource type="Script" uid="uid://cm0abjimn34l8" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Boot_Animation.gd" id="7_vfrra"]
+[ext_resource type="Script" uid="uid://bcr0cuyiljabn" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Shortcuts.gd" id="8_ji177"]
+[ext_resource type="StyleBox" uid="uid://bwku41rsjidlj" path="res://Assets/Themes/Initialization/Styles/square_button_normal.tres" id="8_ojwyg"]
+[ext_resource type="Texture2D" uid="uid://db5mc3s0mlkh0" path="res://Assets/Godot Editor Icons/Boot UI/Folder Icon.png" id="8_qi5vx"]
 [ext_resource type="Script" uid="uid://bphogmmm3k5an" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Boot_Logo.gd" id="8_umjup"]
 [ext_resource type="Script" uid="uid://bhc851ivn7yd2" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Playable_Bunny.gd" id="9_f5las"]
 [ext_resource type="SpriteFrames" uid="uid://bsviuxpnwrexe" path="res://Assets/Sprites/Spriteframes/Editor Bunny Spriteframes.tres" id="10_e3un5"]
 [ext_resource type="Script" uid="uid://giibg5r1s02d" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Ball.gd" id="11_efr6v"]
+[ext_resource type="Texture2D" uid="uid://b845e3vtp5bh7" path="res://Assets/Godot Editor Icons/Boot UI/Embeded Icon.png" id="11_umjup"]
 [ext_resource type="Texture2D" uid="uid://cimjmcfn1kcqo" path="res://Assets/Sprites/Ball Sprite.png" id="12_cbrw4"]
+[ext_resource type="Texture2D" uid="uid://dpuvf4xwd0l2i" path="res://Assets/Godot Editor Icons/Boot UI/Settings Icon.png" id="12_f5las"]
 [ext_resource type="PackedScene" uid="uid://dklc3b83eyisx" path="res://Scenes + Scripts/Editor/Loading/Editor Loading Scene.tscn" id="13_sxpn1"]
 [ext_resource type="Script" uid="uid://bwjaf5recme1f" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Open Adder.gd" id="14_55sfw"]
 
@@ -34,24 +39,22 @@ shader_parameter/stepIntensify = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_di7m1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpaht"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojwyg"]
 content_margin_top = 8.0
 content_margin_right = 6.0
 content_margin_bottom = 8.0
 bg_color = Color(0.20961013, 0.10070642, 3.6098065e-08, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 2
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
-corner_detail = 2
-expand_margin_left = 10.0
-expand_margin_right = 7.0
+corner_detail = 4
 shadow_color = Color(0, 0, 0, 0.717647)
-shadow_size = 4
+shadow_size = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5nb5"]
 bg_color = Color(0.05490196, 0.07450981, 0.105882354, 1)
@@ -273,6 +276,7 @@ script = ExtResource("5_vquke")
 [node name="Wiki_Button" type="Button" parent="Content/Projects" unique_id=397997399]
 layout_mode = 2
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("5_ji177")
 text = "Game Wiki"
 
@@ -344,11 +348,44 @@ layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = SubResource("StyleBoxFlat_lpaht")
+theme_override_styles/normal = ExtResource("8_ojwyg")
 text = "Project Options"
 
-[node name="Shortcuts" type="HBoxContainer" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=594288420]
+[node name="Shortcuts" type="HBoxContainer" parent="Content/Primary_Container/Quickbar Holder/Quickbar" unique_id=594288420 node_paths=PackedStringArray("main_script")]
+z_index = 1
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 30
+alignment = 1
+script = ExtResource("8_ji177")
+main_script = NodePath("../../../../..")
+
+[node name="File_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" unique_id=53703637]
+layout_mode = 2
+tooltip_text = "Open Data Folder"
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.877157, 0.53541946, 0.43637648, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ojwyg")
+text = "F"
+icon = ExtResource("8_qi5vx")
+icon_alignment = 1
+
+[node name="Embeded_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" unique_id=1127947061]
+layout_mode = 2
+tooltip_text = "Open Embeded Levels"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ojwyg")
+icon = ExtResource("11_umjup")
+icon_alignment = 1
+
+[node name="Settings_Button" type="Button" parent="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" unique_id=404435091]
+layout_mode = 2
+tooltip_text = "Open Settings"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ojwyg")
+icon = ExtResource("12_f5las")
+icon_alignment = 1
 
 [node name="BootAnimation" type="PanelContainer" parent="." unique_id=1122394785]
 visible = false
@@ -516,8 +553,14 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("5_ji177")
 text = "Back"
 
-[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=1106186370]
+[node name="Project_Scroll_Container" type="ScrollContainer" parent="Open Project/Panel/Open_Container" unique_id=2039564839]
+custom_minimum_size = Vector2(800, 450)
 layout_mode = 2
+
+[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container/Project_Scroll_Container" unique_id=1106186370]
+custom_minimum_size = Vector2(800, 450)
+layout_mode = 2
+alignment = 1
 script = ExtResource("14_55sfw")
 
 [node name="Slider" type="AnimationPlayer" parent="Open Project" unique_id=299534847]
@@ -543,6 +586,9 @@ caret_blink = true
 [connection signal="pressed" from="Content/Projects/Wiki_Button" to="." method="Game_Wiki_Pressed"]
 [connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/New_Button" to="." method="New_Project_Button_Pressed"]
 [connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/Open_Button" to="." method="Open_Project_Button_Pressed"]
+[connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts/File_Button" to="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" method="Call_Open_UserData"]
+[connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts/Embeded_Button" to="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" method="Call_Select_Embeded_Level"]
+[connection signal="pressed" from="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts/Settings_Button" to="Content/Primary_Container/Quickbar Holder/Quickbar/Shortcuts" method="Call_Open_Settings"]
 [connection signal="body_entered" from="Playable/DeathBoundary" to="Playable/Playable Bunny" method="call_death"]
 [connection signal="body_entered" from="Playable/DeathBoundary" to="Playable/Ball" method="call_respawn"]
 [connection signal="timeout" from="Playable/WaitTime" to="." method="Call_Player"]

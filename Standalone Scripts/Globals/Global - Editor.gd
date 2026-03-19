@@ -1,12 +1,13 @@
 ##Global - Editor.gd
 extends Node
 
-const wiki_loc = "https://trayauraus.github.io/World_Of_Wonders/"
+const wiki_loc = "https://trayauraus.github.io/World_Of_Wonders/editor_docs.html" #"https://trayauraus.github.io/World_Of_Wonders/"
 
 var loading_scene_next_scene: String = ""
 
 #region Project_Data
 const project_data_folder = "user://Project Data"
+const embeded_level_folder = "res://Assets/Built In Levels/"
 const project_data = "project_data.dat"
 const tiles_main_sav = "tileset_main.tlst"
 const tiles_bg_sav = "tileset_bg.tlst"
@@ -42,6 +43,8 @@ func Call_Config_Load(file_name: String = "config.ini") -> void:
 			print("Config file '", file_name, "' not found. A new one will be created upon saving.")
 		else:
 			push_error("Failed to load config '", file_name, "'. Error code: ", error)
+			return
+	print_rich("[color=orange]Config:[/color] Loaded ", file_name)
 
 
 ## Loads a specific variable/value from the loaded config.

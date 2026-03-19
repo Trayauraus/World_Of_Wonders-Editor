@@ -24,17 +24,13 @@ func _ready():
 	Tilemap_Selected(0)
 
 func Tilemap_Selected(index: int):
-	match index:
-		0:
-			selected_tile_source_id = 4
-		1:
-			selected_tile_source_id = 5
-		2:
-			selected_tile_source_id = 6
+	# Add 1 to the index to shift the starting point from 0 to 1
+	selected_tile_source_id = index + 1
 	
 	if editor_script:
 		editor_script.tileset_source_id = selected_tile_source_id
-	print("Selected tilemap source id ", selected_tile_source_id)
+		
+	print("Selected tilemap source id ", selected_tile_source_id) 
 	
 	# Update the palette whenever a new source is selected
 	_populate_palette()
@@ -49,6 +45,7 @@ func _populate_palette():
 		push_warning("Active Tilemap or TileSet is missing!")
 		return
 		
+	
 	var tile_set = active_tilemap.tile_set
 	
 	if not tile_set.has_source(selected_tile_source_id):
@@ -56,6 +53,7 @@ func _populate_palette():
 		return
 		
 	var source = tile_set.get_source(selected_tile_source_id)
+	
 	
 	# 2. Check if the source is an Atlas Source (standard tiles)
 	if source is TileSetAtlasSource:
@@ -83,7 +81,8 @@ func _populate_palette():
 			btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 			btn.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 			btn.icon = tile_icon
-			btn.custom_minimum_size = Vector2(16,16) #tile_region.size # Size button to fit tile
+			btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			btn.custom_minimum_size = Vector2(18,18) #tile_region.size # Size button to fit tile
 			#print(btn.custom_minimum_size)
 			
 			# Keep the button visuals neat

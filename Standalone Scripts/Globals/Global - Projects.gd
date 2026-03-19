@@ -17,8 +17,7 @@ var carrot_locations: Array[CarrotUpgradeData]
 var winzone_location: Array[WinzoneData]
 var deathzone_locations: Array[DeathzoneData]
 
-## Connected Array includes Custom Environment Type, actual "Environment" file to load, Is Cave true/false.
-var custom_environment: Array[CustomEnvironmentData]
+var custom_environment = 0
 
 var custom_environment_call_change_zone: Array[EnvironmentChangeZoneData]
 
@@ -49,6 +48,7 @@ var show_env: bool = true:
 
 var show_collision: bool = false
 
+var is_loading_embeded = false
 #endregion
 
 func Call_Reset_Variables(include_editor_var = true):
@@ -56,7 +56,7 @@ func Call_Reset_Variables(include_editor_var = true):
 	carrot_locations.clear()
 	winzone_location.clear()
 	deathzone_locations.clear()
-	custom_environment.clear()
+	custom_environment = 0
 	custom_environment_call_change_zone.clear()
 	tilemap_array_main.clear()
 	tilemap_array_bg.clear()
@@ -90,12 +90,11 @@ func Call_Project_Save(project_name_normalized: String = GlobalEditor.project_na
 			"deathzone_locations": deathzone_locations,
 			"custom_environment": custom_environment,
 			"custom_environment_call_change_zone": custom_environment_call_change_zone
-			# Note: Tilemap data has been removed from here!
 		}
 		
 		file.store_var(data_to_save, true)
 		file.close()
-		print("Project data saved to: ", save_path)
+		print_rich("Project data saved to: ", save_path, "   under the name: [color=orange]", GlobalEditor.project_name)
 	else:
 		push_error("Failed to save project data. Error code: ", FileAccess.get_open_error())
 
@@ -121,8 +120,13 @@ func Call_Project_Save(project_name_normalized: String = GlobalEditor.project_na
 		push_error("Failed to save Background Tilemap. Error code: ", FileAccess.get_open_error())
 
 
-func Call_Project_Load(project_name_normalized: String, include_tilemaps = true) -> void:
+func Call_Project_Load(project_name_normalized: String, include_tilemaps = true, replace_projectname_with_embeded = true) -> void:
 	var folder_path = GlobalEditor.project_data_folder.path_join(project_name_normalized)
+	
+	if is_loading_embeded:
+		# Replaces 'user://' with 'res://' in the base path
+		folder_path = folder_path.replace(GlobalEditor.project_data_folder, GlobalEditor.embeded_level_folder)
+		print_rich("[color=cyan]EMBEDDED LOAD ACTIVE:[/color] Path redirected to res://")
 	
 	# --- LOAD MAIN PROJECT DATA ---
 	var load_path = folder_path.path_join(GlobalEditor.project_data)
@@ -140,7 +144,8 @@ func Call_Project_Load(project_name_normalized: String, include_tilemaps = true)
 				var saved_version = loaded_data.get("godot_version", {})
 				print_rich("Loading level built in [color=STEEL_BLUE]Godot version: ", saved_version.get("string", "Unknown"))
 				
-				GlobalEditor.project_name = loaded_data.get("project_name", GlobalEditor.project_name)
+				if replace_projectname_with_embeded:
+					GlobalEditor.project_name = loaded_data.get("project_name", GlobalEditor.project_name)
 				player_spawn = loaded_data.get("player_spawn", Vector2.ZERO)
 				
 				var loaded_carrots: Array[CarrotUpgradeData] = []
@@ -155,9 +160,7 @@ func Call_Project_Load(project_name_normalized: String, include_tilemaps = true)
 				loaded_deathzones.assign(loaded_data.get("deathzone_locations", []))
 				deathzone_locations = loaded_deathzones
 				
-				var loaded_envs: Array[CustomEnvironmentData] = []
-				loaded_envs.assign(loaded_data.get("custom_environment", []))
-				custom_environment = loaded_envs
+				custom_environment = loaded_data.get("custom_environment", 0)
 				
 				var loaded_env_zones: Array[EnvironmentChangeZoneData] = []
 				loaded_env_zones.assign(loaded_data.get("custom_environment_call_change_zone", []))

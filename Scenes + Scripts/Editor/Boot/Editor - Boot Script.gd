@@ -9,6 +9,7 @@ var can_open_projects = true
 var temp_name_hold = ""
 
 func _ready():
+	GlobalProject.is_loading_embeded = false
 	GlobalEditor.Call_Config_Load()
 	
 	create_project_folder()

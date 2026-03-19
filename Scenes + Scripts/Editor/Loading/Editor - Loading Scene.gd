@@ -27,7 +27,7 @@ func _load_project_and_transition() -> void:
 	
 	# 2. Call the load function
 	# Note: Because this isn't on a background thread, the game will wait here until it finishes reading the files.
-	GlobalProject.Call_Project_Load(GlobalEditor.project_name_normalized)
+	GlobalProject.Call_Project_Load(GlobalEditor.project_name_normalized, true, false)
 	
 	# Optional: Set progress bar to full visually once the load function finishes
 	if progress_bar:
@@ -43,6 +43,7 @@ func _load_project_and_transition() -> void:
 		if error_code == OK:
 			if OS.has_feature("editor"):
 				print_rich("Loading Screen: Changing scene to [color=orange]", GlobalEditor.loading_scene_next_scene)
+				GlobalProject.is_loading_embeded = false
 		else:
 			_trigger_error("Loading Screen: Failed to change scene! Godot Error Code: " + str(error_code))
 	else:

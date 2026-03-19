@@ -82,7 +82,7 @@ func Call_Quit_Project():
 	
 	if click_count == 2: GlobalProject.Call_Reset_Variables(); get_tree().change_scene_to_file("res://Scenes + Scripts/Editor/Boot/Editor Boot Scene.tscn")
 	
-	if click_timer:
+	if click_timer and not click_count == 2:
 		click_timer.start()
 
 func Click_Timer_Timeout():

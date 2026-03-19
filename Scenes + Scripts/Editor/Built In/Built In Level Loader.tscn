@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://6li3mn3udnak"]
+
+[ext_resource type="Shader" uid="uid://bcl5y2iwkixjp" path="res://Assets/Shaders/Gradient Shader.gdshader" id="1_j7rnk"]
+[ext_resource type="Theme" uid="uid://ceeybiro2pc87" path="res://Assets/Themes/Initialization/Initalization Theme.tres" id="2_5rp5e"]
+[ext_resource type="LabelSettings" uid="uid://byigyeoj4boet" path="res://Assets/Label Settings/Load Settings.tres" id="3_dpnrt"]
+[ext_resource type="StyleBox" uid="uid://b7dik2g44yr4l" path="res://Assets/Themes/Initialization/Styles/front_door_button_normal_inverse.tres" id="4_lafp1"]
+[ext_resource type="Script" uid="uid://bwjaf5recme1f" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Open Adder.gd" id="5_u5m83"]
+
+[sub_resource type="GDScript" id="GDScript_j7rnk"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	GlobalProject.is_loading_embeded = true
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr24d"]
+shader = ExtResource("1_j7rnk")
+shader_parameter/first_color = Color(0.20392157, 0.08235294, 0.043137256, 1)
+shader_parameter/second_color = Color(0.07322379, 0.0074622068, 0, 1)
+shader_parameter/position = 0.7650001313375001
+shader_parameter/color_angle = 1.575
+shader_parameter/stepIntensify = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jad8k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7rnk"]
+
+[node name="Built In Level Loader" type="Control" unique_id=465659179]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_j7rnk")
+
+[node name="Panel" type="Panel" parent="." unique_id=677347963]
+material = SubResource("ShaderMaterial_nr24d")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_5rp5e")
+
+[node name="Open_Container" type="VBoxContainer" parent="Panel" unique_id=953639267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/Open_Container" unique_id=637253121]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jad8k")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Open_Container/PanelContainer" unique_id=678702471]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Project" type="Label" parent="Panel/Open_Container/PanelContainer/HBoxContainer" unique_id=975721125]
+layout_mode = 2
+text = "Select Built In Project:"
+label_settings = ExtResource("3_dpnrt")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Open_Container/PanelContainer" unique_id=1165039722]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Back_Button" type="Button" parent="Panel/Open_Container/PanelContainer/HBoxContainer2" unique_id=362061624]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("4_lafp1")
+text = "Back"
+
+[node name="Note" type="Label" parent="Panel/Open_Container" unique_id=1774754678]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "(Not all levels are available as a few used a different format throughout the game and are incompatable.)
+Trying to save in these makes a copy in the save file folder."
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Open_Container" unique_id=1111436533]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_j7rnk")
+
+[node name="Project_Scroll_Container" type="ScrollContainer" parent="Panel/Open_Container" unique_id=732082976]
+custom_minimum_size = Vector2(1000, 580)
+layout_mode = 2
+
+[node name="Project_Container" type="VBoxContainer" parent="Panel/Open_Container/Project_Scroll_Container" unique_id=886052380]
+custom_minimum_size = Vector2(800, 450)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_u5m83")
+enable_embeded_only = true
+PROJECT_DATA_DIR = "res://Assets/Built In Levels/"
+
+[connection signal="pressed" from="Panel/Open_Container/PanelContainer/HBoxContainer2/Back_Button" to="Panel/Open_Container/Project_Scroll_Container/Project_Container" method="Return_To_Title"]

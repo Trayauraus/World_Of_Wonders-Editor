@@ -7,7 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://byigyeoj4boet" path="res://Assets/Label Settings/Load Settings.tres" id="3_fgkvh"]
 [ext_resource type="Theme" uid="uid://ceeybiro2pc87" path="res://Assets/Themes/Initialization/Initalization Theme.tres" id="3_jxbkj"]
 [ext_resource type="StyleBox" uid="uid://dghyl511t20vp" path="res://Assets/Themes/Project/project_panel_darker.tres" id="4_6xpy4"]
-[ext_resource type="Script" uid="uid://cggh4ascdjxd" path="res://Scenes + Scripts/Editor/Helper Scripts/Control Script.gd" id="4_ipvro"]
+[ext_resource type="Script" uid="uid://cggh4ascdjxd" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control Script.gd" id="4_ipvro"]
 [ext_resource type="StyleBox" uid="uid://dsf2wd63p4my6" path="res://Assets/Themes/Project/button_lighter.tres" id="7_6my6d"]
 [ext_resource type="Texture2D" uid="uid://k3p8s8fagtn8" path="res://WoW Editor.png" id="7_jh2va"]
 [ext_resource type="Texture2D" uid="uid://s7jl85sqhb3" path="res://Assets/Godot Editor Icons/Bunny Sleep.png" id="8_xr8lh"]
@@ -171,7 +171,9 @@ shader_parameter/position = 0.7650001313375001
 shader_parameter/color_angle = 1.575
 shader_parameter/stepIntensify = 10
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y18pv"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wrdkv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eemy6"]
 
 [sub_resource type="Animation" id="Animation_i2dkp"]
 length = 0.001
@@ -327,18 +329,22 @@ layout_mode = 2
 
 [node name="File_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=883611407]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "File"
 
 [node name="Options_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1564248429]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Options"
 
 [node name="Export_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1955156149]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Export"
 
 [node name="Help_Button" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=733256399]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Help"
 
 [node name="Properties_Label_Container" type="HBoxContainer" parent="VSplitContainer/ControlContainer" unique_id=1604582168]
@@ -361,9 +367,9 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/split_bar_background = ExtResource("2_22iwr")
-split_offsets = PackedInt32Array(208, 1000)
+split_offsets = PackedInt32Array(213, 1000)
 dragger_visibility = 2
-split_offset = 208
+split_offset = 213
 
 [node name="ToolList" type="PanelContainer" parent="VSplitContainer/HSplitContainer" unique_id=1004615166]
 layout_mode = 2
@@ -401,6 +407,7 @@ layout_mode = 2
 [node name="Tool_Select" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=2128952332]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -414,6 +421,7 @@ expand_icon = true
 [node name="Tool_PlayerButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=64102119]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -427,6 +435,7 @@ expand_icon = true
 [node name="Tool_TilemapButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=858554440]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -439,6 +448,7 @@ expand_icon = true
 
 [node name="Tileset_Options" type="OptionButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=1959184323]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
@@ -456,6 +466,7 @@ popup/item_2/id = 2
 [node name="Tool_CarrotButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=201779373]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -469,6 +480,7 @@ expand_icon = true
 [node name="Tool_CollisionButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=954148693]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -482,6 +494,7 @@ expand_icon = true
 [node name="Tool_CoinButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=561440726]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -495,6 +508,7 @@ expand_icon = true
 [node name="Tool_EnemyButton" type="Button" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox" unique_id=18254373]
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -509,6 +523,7 @@ expand_icon = true
 visible = false
 texture_filter = 1
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("7_6my6d")
@@ -531,6 +546,7 @@ horizontal_alignment = 1
 
 [node name="Main_Tilemap" type="CheckButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=218274769]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
@@ -541,6 +557,7 @@ text = "Is Main Tilemap"
 
 [node name="Rectangle_Tool" type="CheckButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=289335460]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ffsf6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_na5ol")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ipvro")
@@ -641,6 +658,7 @@ horizontal_alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=468507029]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_l3pgt")
 selected = 0
 item_count = 6
@@ -668,6 +686,7 @@ horizontal_alignment = 1
 
 [node name="Property_Button" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2079566296]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -678,6 +697,7 @@ text = "Property 1"
 
 [node name="Property_Button2" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1768282114]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -688,6 +708,7 @@ text = "Property 2"
 
 [node name="Property_Button3" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=455959985]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -699,6 +720,7 @@ expand_icon = true
 
 [node name="Property_Button4" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1959061579]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -709,6 +731,7 @@ text = "Property 4"
 
 [node name="Property_Button5" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1426252724]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -719,6 +742,7 @@ text = "Property 5"
 
 [node name="Property_Button6" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=316338910]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -729,6 +753,7 @@ text = "Property 6"
 
 [node name="Property_Button7" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1437549906]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -739,6 +764,7 @@ text = "Property 7"
 
 [node name="Property_Button8" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1435194362]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -749,6 +775,7 @@ text = "Property 8"
 
 [node name="Property_Button9" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=850015913]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -759,6 +786,7 @@ text = "Property 9"
 
 [node name="Property_Button10" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=585271025]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -770,6 +798,7 @@ expand_icon = true
 
 [node name="Property_Button11" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2000299052]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -780,6 +809,7 @@ text = "Property 11"
 
 [node name="Property_Button12" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=933418337]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -790,6 +820,7 @@ text = "Property 12"
 
 [node name="Property_Button13" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1853178689]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
 theme_override_styles/hover = ExtResource("2_s276o")
@@ -896,6 +927,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="New_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=220991003]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 text = "New Project"
@@ -907,6 +939,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="Open_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1080949705]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 text = "Open Project"
@@ -918,6 +951,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="Save_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=2056801162]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 text = "Save Project"
@@ -929,6 +963,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="Quit_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer" unique_id=1792894182]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 text = "Quit Project"
@@ -985,6 +1020,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="TG_BG_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=1944150693]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 toggle_mode = true
@@ -997,6 +1033,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="TG_BG_Tiles_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=11236038]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 toggle_mode = true
@@ -1009,6 +1046,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="TG_Environment_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=121459752]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 toggle_mode = true
@@ -1021,6 +1059,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 
 [node name="TG_Collision_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Options Container/VBoxContainer" unique_id=691037906]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 toggle_mode = true
@@ -1060,6 +1099,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ancft")
 [node name="Export_Button" type="Button" parent="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer" unique_id=999549048]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("17_6ccjt")
 theme_override_styles/hover = ExtResource("17_6ccjt")
 text = "Export Project"
@@ -1110,8 +1150,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 3.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_jxbkj")
@@ -1121,24 +1159,30 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 0.5
+offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=1015363113]
+[node name="PanelContainer" type="PanelContainer" parent="Open Project/Panel/Open_Container" unique_id=1840323132]
 layout_mode = 2
-alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wrdkv")
 
-[node name="Project" type="Label" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=169572223]
+[node name="HBoxContainer" type="HBoxContainer" parent="Open Project/Panel/Open_Container/PanelContainer" unique_id=1015363113]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Project" type="Label" parent="Open Project/Panel/Open_Container/PanelContainer/HBoxContainer" unique_id=169572223]
 layout_mode = 2
 text = "Select A Project"
 label_settings = ExtResource("3_fgkvh")
 
-[node name="VSeparator" type="VSeparator" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=1186393769]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Open Project/Panel/Open_Container/PanelContainer" unique_id=825685298]
 layout_mode = 2
-theme_override_constants/separation = 783
-theme_override_styles/separator = SubResource("StyleBoxEmpty_y18pv")
+mouse_filter = 2
+alignment = 2
 
-[node name="Back_Button" type="Button" parent="Open Project/Panel/Open_Container/HBoxContainer" unique_id=1689547054]
+[node name="Back_Button" type="Button" parent="Open Project/Panel/Open_Container/PanelContainer/HBoxContainer2" unique_id=1689547054]
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -1146,8 +1190,19 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("16_6ccjt")
 text = "Back"
 
-[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container" unique_id=106817281]
+[node name="HSeparator" type="HSeparator" parent="Open Project/Panel/Open_Container" unique_id=1845885035]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_eemy6")
+
+[node name="Project_Scroll_Container" type="ScrollContainer" parent="Open Project/Panel/Open_Container" unique_id=648026064]
+custom_minimum_size = Vector2(1000, 580)
+layout_mode = 2
+
+[node name="Project_Container" type="VBoxContainer" parent="Open Project/Panel/Open_Container/Project_Scroll_Container" unique_id=1567446260]
+custom_minimum_size = Vector2(800, 450)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("20_i2dkp")
 
 [node name="Slider_Animations" type="AnimationPlayer" parent="Open Project" unique_id=1280520548]
@@ -1201,6 +1256,9 @@ horizontal_alignment = 1
 [node name="Err_Timeout_Timer" type="Timer" parent="Error Panel" unique_id=1044644138]
 wait_time = 3.0
 
+[node name="Lighting" type="DirectionalLight2D" parent="." unique_id=1309278136]
+energy = 0.3
+
 [connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/File_Button" to="VSplitContainer/ControlContainer" method="_on_file_button_pressed"]
 [connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Options_Button" to="VSplitContainer/ControlContainer" method="_on_options_button_pressed"]
 [connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Export_Button" to="VSplitContainer/ControlContainer" method="_on_export_button_pressed"]
@@ -1216,5 +1274,5 @@ wait_time = 3.0
 [connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container/VBoxContainer/Export_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/Export Container" method="Call_Export"]
 [connection signal="confirmed" from="New Project" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="_on_confirmation_dialog_confirmed"]
 [connection signal="text_changed" from="New Project/LineEdit" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="LEdit_Text_changed"]
-[connection signal="pressed" from="Open Project/Panel/Open_Container/HBoxContainer/Back_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Back_From_Open"]
+[connection signal="pressed" from="Open Project/Panel/Open_Container/PanelContainer/HBoxContainer2/Back_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Back_From_Open"]
 [connection signal="timeout" from="Error Panel/Err_Timeout_Timer" to="." method="Hide_Error"]

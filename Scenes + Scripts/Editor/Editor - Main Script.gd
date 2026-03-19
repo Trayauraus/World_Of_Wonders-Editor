@@ -54,6 +54,16 @@ var _current_alt_tile: int = 0
 
 #region Built-in Functions
 func _ready():
+	if typeof(GlobalProject.custom_environment) != TYPE_INT:
+		GlobalProject.custom_environment = 0
+		print_rich("[color=yellow]Old save format detected. Resetting environment to default.")
+	
+	if GlobalProject.custom_environment != 0:
+		print("Environment is not default. Chaning to option ", GlobalProject.custom_environment)
+		Call_Environment_Change(GlobalProject.custom_environment)
+		
+	
+	GlobalProject.is_loading_embeded = false
 	if player: player.global_position = GlobalProject.player_spawn
 	var valid_tool_index = 0
 	
@@ -66,13 +76,15 @@ func _ready():
 			print("Skipping non-tool: ", child.name)
 	
 	_on_tool_button_pressed(2)
-	Call_Load_Tilemap_Data()
 	GlobalEditor.loading_scene_next_scene = ""
 	if editor_camera:
 		editor_camera.zoom = Vector2(0.5, 0.5)
 		editor_camera.position = Vector2.ZERO
 	GlobalProject.hide_bg_tiles_changed.connect(Hide_Tileset)
 	GlobalProject.show_env_changed.connect(Show_Environment)
+	
+	await get_tree().process_frame
+	Call_Load_Tilemap_Data()
 
 func _on_tool_button_pressed(tool_id: int):
 	current_tool = tool_id as SelectedTool
@@ -361,14 +373,15 @@ func Call_Environment_Change(index: int = 0, update_current_index = true):
 	
 	match index:
 		0: 
+			GlobalProject.custom_environment = 0
 			environment.environment = null
 			current_env_data = null
 			return
-		1: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Lava.tres")
-		2: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Lava Dark.tres")
-		3: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Desert.tres")
-		4: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Ice.tres")
-		5: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Grass.tres")
+		1: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Lava.tres"); GlobalProject.custom_environment = 1
+		2: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Lava Dark.tres"); GlobalProject.custom_environment = 2
+		3: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Desert.tres"); GlobalProject.custom_environment = 3
+		4: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Ice.tres"); GlobalProject.custom_environment = 4
+		5: loaded_resource = load("res://Resources - WoW/WoW Environment Resources/Grass.tres"); GlobalProject.custom_environment = 5
 
 	if not GlobalProject.show_env: return
 	# 2. Save to the typed variable
@@ -385,11 +398,11 @@ func apply_environment_settings():
 	if current_env_data.world_env_normal:
 		environment.environment = current_env_data.world_env_normal
 		
-	# Example: Setting a light color from the data
-	if current_env_data.dir_light_normal:
-		var light_instance = current_env_data.dir_light_normal.instantiate()
-		active_light = light_instance
-		add_child(light_instance)
+	# Example: Setting a light color from the data. Currently Disabled
+	#if current_env_data.dir_light_normal:
+	#	var light_instance = current_env_data.dir_light_normal.instantiate()
+	#	active_light = light_instance
+	#	add_child(light_instance)
 		
 	print("Switched to environment with ambient color: ", current_env_data.ambient_color)
 
