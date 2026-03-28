@@ -25,8 +25,6 @@ shader_parameter/stepIntensify = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jad8k"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7rnk"]
-
 [node name="Built In Level Loader" type="Control" unique_id=465659179]
 layout_mode = 3
 anchors_preset = 15
@@ -85,15 +83,10 @@ text = "Back"
 [node name="Note" type="Label" parent="Panel/Open_Container" unique_id=1774754678]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "(Not all levels are available as a few used a different format throughout the game and are incompatable.)
-Trying to save in these makes a copy in the save file folder."
-
-[node name="HSeparator" type="HSeparator" parent="Panel/Open_Container" unique_id=1111436533]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_j7rnk")
+text = "(Some levels listed were converted via script and may contain misplaced tiles due to this.)"
 
 [node name="Project_Scroll_Container" type="ScrollContainer" parent="Panel/Open_Container" unique_id=732082976]
-custom_minimum_size = Vector2(1000, 580)
+custom_minimum_size = Vector2(1000, 540)
 layout_mode = 2
 
 [node name="Project_Container" type="VBoxContainer" parent="Panel/Open_Container/Project_Scroll_Container" unique_id=886052380]

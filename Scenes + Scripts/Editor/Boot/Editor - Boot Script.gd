@@ -9,6 +9,7 @@ var can_open_projects = true
 var temp_name_hold = ""
 
 func _ready():
+	OS.set_low_processor_usage_mode(true)
 	GlobalProject.is_loading_embeded = false
 	GlobalEditor.Call_Config_Load()
 	

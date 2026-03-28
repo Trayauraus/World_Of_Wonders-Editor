@@ -1,4 +1,4 @@
-extends GridContainer
+extends VBoxContainer
 class_name Tile_Palleter
 
 @export var main_tilemap: TileMapLayer
@@ -6,6 +6,12 @@ class_name Tile_Palleter
 
 @export var main_tilemap_check_button: CheckButton
 @export var rectangle_check_button: CheckButton
+
+@export_group("Palette Settings")
+## The size used for standard square tiles
+@export var default_tile_size: Vector2 = Vector2(18, 18)
+## The size used for door segments (prevents compression)
+@export var door_tile_size: Vector2 = Vector2(48, 12)
 
 @export_category("Script Connections")
 @export var editor_script: Editor_Script
@@ -16,88 +22,133 @@ var selected_tile_source_id = -1
 var selected_tile_alternative = 0
 var is_box_placement_mode: bool = false
 
+# Define our sections with their start/end vectors. 
+var sections = [
+	{"name": "Lava Tiles", "start": Vector2i(0, 0), "end": Vector2i(9, 9)},
+	{"name": "Desert Tiles", "start": Vector2i(11, 0), "end": Vector2i(20, 9)},
+	{"name": "Ice Tiles", "start": Vector2i(22, 0), "end": Vector2i(31, 9)},
+	{"name": "Grassland Tiles", "start": Vector2i(0, 11), "end": Vector2i(9, 20)},
+	{"name": "Clouds Tiles", "start": Vector2i(11, 11), "end": Vector2i(20, 20)},
+	{"name": "Cave Tiles", "start": Vector2i(22, 11), "end": Vector2i(31, 20)},
+	{"name": "Background Tiles", "start": Vector2i(11, 22), "end": Vector2i(20, 31)},
+	{"name": "Door Tiles", "start": Vector2i(22, 22), "end": Vector2i(25, 31), "is_door": true},
+	{"name": "Misc Tiles", "start": Vector2i(0, 22), "end": Vector2i(9, 31)}
+]
+
 func _ready():
-	# Make sure an active tilemap is assigned before populating
 	if main_tilemap:
 		active_tilemap = main_tilemap
-		
 	Tilemap_Selected(0)
 
 func Tilemap_Selected(index: int):
-	# Add 1 to the index to shift the starting point from 0 to 1
+	# index 0 = Source ID 1, index 1 = Source ID 2, etc.
 	selected_tile_source_id = index + 1
-	
 	if editor_script:
 		editor_script.tileset_source_id = selected_tile_source_id
-		
-	print("Selected tilemap source id ", selected_tile_source_id) 
-	
-	# Update the palette whenever a new source is selected
 	_populate_palette()
 
 func _populate_palette():
-	# 1. Clear out any existing buttons from the grid
 	for child in get_children():
 		child.queue_free()
 		
-	# Ensure we have a valid tilemap and tileset to read from
 	if not active_tilemap or not active_tilemap.tile_set:
-		push_warning("Active Tilemap or TileSet is missing!")
 		return
 		
-	
 	var tile_set = active_tilemap.tile_set
-	
 	if not tile_set.has_source(selected_tile_source_id):
-		push_warning("Source ID " + str(selected_tile_source_id) + " not found in TileSet.")
 		return
 		
 	var source = tile_set.get_source(selected_tile_source_id)
 	
-	
-	# 2. Check if the source is an Atlas Source (standard tiles)
 	if source is TileSetAtlasSource:
 		var atlas_source = source as TileSetAtlasSource
 		var atlas_texture = atlas_source.texture
 		
-		# 3. Loop through every tile created in this atlas source
+		# Gather all tiles
+		var all_tiles = []
 		for i in range(atlas_source.get_tiles_count()):
 			var atlas_coords = atlas_source.get_tile_id(i)
-			var tile_region = atlas_source.get_tile_texture_region(atlas_coords)
+			if atlas_coords == Vector2i(11, 31): continue 
+			all_tiles.append(atlas_coords)
 			
-			# Create an AtlasTexture to crop the image to just this tile
-			var tile_icon = AtlasTexture.new()
-			tile_icon.atlas = atlas_texture
-			tile_icon.region = tile_region
+		var is_first_section_ui = true
+		
+		# We use a counter for generic naming (Tileset #1, Tileset #2...)
+		var generic_section_index = 1
+		
+		for section in sections:
+			var section_tiles = []
+			for coords in all_tiles:
+				if coords.x >= section.start.x and coords.x <= section.end.x and \
+				   coords.y >= section.start.y and coords.y <= section.end.y:
+					section_tiles.append(coords)
 			
-			# Create a new Button to hold the tile image
-			var btn = Button.new()
+			if section_tiles.size() == 0: continue
+				
+			# Separator
+			if not is_first_section_ui:
+				add_child(HSeparator.new())
+				
+			# Label
+			var label = Label.new()
 			
-			btn.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
-			btn.add_theme_stylebox_override("hover", StyleBoxFlat.new())
-			btn.add_theme_stylebox_override("pressed", StyleBoxFlat.new())
-			btn.add_theme_stylebox_override("hover_pressed", StyleBoxFlat.new())
-			btn.add_theme_stylebox_override("disabled", StyleBoxEmpty.new())
-			btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-			btn.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-			btn.icon = tile_icon
-			btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			btn.custom_minimum_size = Vector2(18,18) #tile_region.size # Size button to fit tile
-			#print(btn.custom_minimum_size)
+			# Logic for Dynamic Naming:
+			# If the source ID is 1, use the specific names. 
+			# Otherwise, use generic numbering.
+			if selected_tile_source_id == 1:
+				label.text = section.name
+			else:
+				label.text = "Tileset Split #" + str(generic_section_index)
 			
-			# Keep the button visuals neat
-			btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			btn.focus_mode = Control.FOCUS_NONE # Optional: prevents UI focus boxes
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			add_child(label)
 			
-			# 4. Connect the pressed signal to our selection function.
-			# We use .bind() to pass the specific atlas_coords of this tile to the function.
-			btn.pressed.connect(_on_tile_button_pressed.bind(atlas_coords))
+			var is_door_section = section.has("is_door") and section["is_door"]
 			
-			# Add the button as a child of this GridContainer
-			add_child(btn)
+			# Container Logic
+			var tile_container: Container
+			if is_door_section:
+				tile_container = VBoxContainer.new()
+				tile_container.add_theme_constant_override("separation", 0) # Seamless stack
+			else:
+				tile_container = HFlowContainer.new()
+				
+			tile_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			add_child(tile_container)
+			
+			for atlas_coords in section_tiles:
+				var tile_region = atlas_source.get_tile_texture_region(atlas_coords)
+				var tile_icon = AtlasTexture.new()
+				tile_icon.atlas = atlas_texture
+				tile_icon.region = tile_region
+				
+				var btn = Button.new()
+				# Styling
+				btn.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
+				btn.add_theme_stylebox_override("hover", StyleBoxFlat.new())
+				btn.add_theme_stylebox_override("pressed", StyleBoxFlat.new())
+				btn.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+				btn.icon = tile_icon
+				btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				
+				# Handle Sizing and Alignment
+				if is_door_section:
+					btn.custom_minimum_size = door_tile_size
+					btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+					btn.expand_icon = true 
+				else:
+					btn.custom_minimum_size = default_tile_size
+				
+				btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				btn.focus_mode = Control.FOCUS_NONE 
+				btn.pressed.connect(_on_tile_button_pressed.bind(atlas_coords))
+				
+				tile_container.add_child(btn)
+			
+			is_first_section_ui = false
+			generic_section_index += 1
 
 func _on_tile_button_pressed(atlas_coords: Vector2i):
-	# Save the location to your global editor singleton
 	GlobalProject.selected_tile_atlas_coords = atlas_coords
 	if OS.has_feature("editor"):
-		print("Tile Selected! Atlas Coords: ", atlas_coords, " Source ID: ", selected_tile_source_id)
+		print("Tile Selected: ", atlas_coords)

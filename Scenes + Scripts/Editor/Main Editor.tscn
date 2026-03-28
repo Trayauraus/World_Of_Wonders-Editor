@@ -279,7 +279,7 @@ shader_parameter/position = 0.5
 shader_parameter/color_angle = 1.565
 shader_parameter/stepIntensify = 10
 
-[node name="Editor" type="Control" unique_id=1550646374 node_paths=PackedStringArray("environment", "background", "player", "editor_camera", "main_tilemap", "bg_tilemap", "main_layer_checkbox", "rectangle_tool_checkbox", "tool_list", "tool_label", "err_panel", "err_timer", "err_text")]
+[node name="Editor" type="Control" unique_id=1550646374 node_paths=PackedStringArray("environment", "background", "player", "editor_camera", "main_tilemap", "bg_tilemap", "main_layer_checkbox", "rectangle_tool_checkbox", "environment_options", "tool_list", "tool_label", "err_panel", "err_timer", "err_text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,6 +296,7 @@ bg_tilemap = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportConta
 main_layer_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Main_Tilemap")
 rectangle_tool_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Rectangle_Tool")
 tileset_source_id = 4
+environment_options = NodePath("VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List/OptionButton")
 tool_list = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox")
 tool_label = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header/Header_SubLabel")
 err_panel = NodePath("Error Panel")
@@ -573,13 +574,12 @@ custom_minimum_size = Vector2(0, 135)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TileGridContainer" type="GridContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/ScrollContainer" unique_id=607888401 node_paths=PackedStringArray("main_tilemap", "bg_tilemap", "main_tilemap_check_button", "rectangle_check_button", "editor_script")]
+[node name="TileGridContainer" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/ScrollContainer" unique_id=860084274 node_paths=PackedStringArray("main_tilemap", "bg_tilemap", "main_tilemap_check_button", "rectangle_check_button", "editor_script")]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_na5ol")
-columns = 8
 script = ExtResource("11_na5ol")
 main_tilemap = NodePath("../../../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/Main Tileset")
 bg_tilemap = NodePath("../../../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")

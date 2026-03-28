@@ -18,6 +18,7 @@ class_name Editor_Script
 @export var main_layer_checkbox: CheckButton
 @export var rectangle_tool_checkbox: CheckButton
 @export var tileset_source_id: int = 0 # Default ID for tilesets is usually 0
+@export var environment_options: OptionButton # Default ID for tilesets is usually 0
 
 @export var tool_list: VBoxContainer 
 @export var tool_label: Label
@@ -48,12 +49,18 @@ var active_light: DirectionalLight2D = null
 
 # Variable to hold our current tile rotation/flip state
 var _current_alt_tile: int = 0
+
+# Mobile Multi-Touch Variables
+var _touch_points: Dictionary = {}
+var _start_zoom: Vector2 = Vector2.ONE
+var _start_distance: float = 0.0
 #endregion
 
 
 
 #region Built-in Functions
 func _ready():
+	DisplayServer.window_request_attention()
 	if typeof(GlobalProject.custom_environment) != TYPE_INT:
 		GlobalProject.custom_environment = 0
 		print_rich("[color=yellow]Old save format detected. Resetting environment to default.")
@@ -61,6 +68,8 @@ func _ready():
 	if GlobalProject.custom_environment != 0:
 		print("Environment is not default. Chaning to option ", GlobalProject.custom_environment)
 		Call_Environment_Change(GlobalProject.custom_environment)
+		if environment_options:
+			environment_options.selected = GlobalProject.custom_environment
 		
 	
 	GlobalProject.is_loading_embeded = false
@@ -145,26 +154,61 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mirror"):
 		_mirror_current_tile()
 	
-	# Camera Panning State
+	# --- Multi-touch Pan & Zoom (Mobile) ---
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			_touch_points[event.index] = event.position
+		else:
+			_touch_points.erase(event.index)
+
+		if _touch_points.size() == 2:
+			var keys = _touch_points.keys()
+			_start_distance = _touch_points[keys[0]].distance_to(_touch_points[keys[1]])
+			_start_zoom = editor_camera.zoom
+
+	elif event is InputEventScreenDrag:
+		if _touch_points.has(event.index):
+			_touch_points[event.index] = event.position
+
+			if _touch_points.size() == 2:
+				var keys = _touch_points.keys()
+				var p1 = _touch_points[keys[0]]
+				var p2 = _touch_points[keys[1]]
+
+				# Pan camera (half of relative movement to calculate average midpoint drag)
+				editor_camera.position -= (event.relative / 2.0) / editor_camera.zoom
+
+				# Zoom camera
+				var current_distance = p1.distance_to(p2)
+				if _start_distance > 5.0: # Prevent dividing by zero / extreme jitter
+					var zoom_ratio = current_distance / _start_distance
+					var new_zoom_val = clamp(_start_zoom.x * zoom_ratio, MIN_ZOOM, MAX_ZOOM)
+					editor_camera.zoom = Vector2(new_zoom_val, new_zoom_val)
+					if background:
+						var sprite_scale_val = 1.0 / new_zoom_val
+						background.scale = Vector2(sprite_scale_val * 1.7, sprite_scale_val * 1.7)
+
+	# Camera Panning State (PC)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE:
 			_is_panning = event.pressed
 				
-		# Camera Zooming
+		# Camera Zooming (PC)
 		elif event.is_pressed() and sub_viewport_container and sub_viewport_container.get_global_rect().has_point(get_global_mouse_position()):
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				_apply_zoom(ZOOM_STEP)
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				_apply_zoom(-ZOOM_STEP)
 
-	# Handle camera movement while panning
+	# Handle camera movement while panning (PC)
 	elif event is InputEventMouseMotion and _is_panning:
 		editor_camera.position -= event.relative / editor_camera.zoom
 	
 	# -- Placement Control --
-	# This section is now properly outdented so it isn't trapped inside the panning block
 	var is_mouse_event = event is InputEventMouseButton or event is InputEventMouseMotion
-	if is_mouse_event and not _is_panning:
+	
+	# _touch_points.size() < 2 ensures we don't accidentally draw while doing a 2-finger pan/zoom on mobile.
+	if is_mouse_event and not _is_panning and _touch_points.size() < 2:
 		# Check if mouse is strictly inside the viewport area to avoid drawing over UI side panels
 		if sub_viewport_container and sub_viewport_container.get_global_rect().has_point(get_global_mouse_position()):
 			# Note: These IDs match your incremented GlobalEditor.selected_tool_id logic
@@ -179,8 +223,9 @@ func _input(event: InputEvent) -> void:
 func _apply_zoom(amount: float) -> void:
 	var new_zoom = clamp(editor_camera.zoom.x + amount, MIN_ZOOM, MAX_ZOOM)
 	editor_camera.zoom = Vector2(new_zoom, new_zoom)
-	var sprite_scale_val = 1.0 / new_zoom
-	background.scale = Vector2(sprite_scale_val * 1.7, sprite_scale_val * 1.7)
+	if background:
+		var sprite_scale_val = 1.0 / new_zoom
+		background.scale = Vector2(sprite_scale_val * 1.7, sprite_scale_val * 1.7)
 
 func _rotate_current_tile() -> void:
 	var is_transposed = bool(_current_alt_tile & TileSetAtlasSource.TRANSFORM_TRANSPOSE)
@@ -400,9 +445,9 @@ func apply_environment_settings():
 		
 	# Example: Setting a light color from the data. Currently Disabled
 	#if current_env_data.dir_light_normal:
-	#	var light_instance = current_env_data.dir_light_normal.instantiate()
-	#	active_light = light_instance
-	#	add_child(light_instance)
+	#   var light_instance = current_env_data.dir_light_normal.instantiate()
+	#   active_light = light_instance
+	#   add_child(light_instance)
 		
 	print("Switched to environment with ambient color: ", current_env_data.ambient_color)
 

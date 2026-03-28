@@ -21,8 +21,9 @@ var custom_environment = 0
 
 var custom_environment_call_change_zone: Array[EnvironmentChangeZoneData]
 
-var tilemap_array_main: Array[TileDataResource]
-var tilemap_array_bg: Array[TileDataResource]
+# CHANGED: Use highly efficient PackedByteArray instead of Array[TileDataResource]
+var tilemap_array_main: PackedByteArray
+var tilemap_array_bg: PackedByteArray
 
 #endregion
 
@@ -70,10 +71,7 @@ func Call_Reset_Variables(include_editor_var = true):
 
 ##Saves project data in current state.
 func Call_Project_Save(project_name_normalized: String = GlobalEditor.project_name_normalized) -> void:
-	# 1. Create the specific project folder path
 	var folder_path = GlobalEditor.project_data_folder.path_join(project_name_normalized)
-	
-	# 2. Make sure the folder exists (this will create it if it doesn't)
 	DirAccess.make_dir_recursive_absolute(folder_path)
 	
 	# --- SAVE MAIN PROJECT DATA ---
@@ -83,7 +81,12 @@ func Call_Project_Save(project_name_normalized: String = GlobalEditor.project_na
 	if file:
 		var data_to_save = {
 			"project_name": GlobalEditor.project_name, 
+			"project_version": ProjectSettings.get_setting("application/config/version"),
 			"godot_version": Engine.get_version_info(),
+			"time_when_saved": Time.get_date_string_from_system() if not OS.has_feature("editor") else 0,
+			"last_device_processor": OS.get_processor_name() if not OS.has_feature("editor") else "",
+			"last_screen_count": DisplayServer.get_screen_count() if not OS.has_feature("editor") else 0,
+			"language": OS.get_locale() if not OS.has_feature("editor") else "",
 			"player_spawn": player_spawn,
 			"carrot_locations": carrot_locations,
 			"winzone_location": winzone_location,
@@ -102,7 +105,7 @@ func Call_Project_Save(project_name_normalized: String = GlobalEditor.project_na
 	var main_tiles_path = folder_path.path_join(GlobalEditor.tiles_main_sav)
 	var main_file = FileAccess.open(main_tiles_path, FileAccess.WRITE)
 	if main_file:
-		# We can store the array directly!
+		# Godot saves PackedByteArrays extremely efficiently natively
 		main_file.store_var(tilemap_array_main, true)
 		main_file.close()
 		print("Main Tilemap saved to: ", main_tiles_path)
@@ -124,7 +127,6 @@ func Call_Project_Load(project_name_normalized: String, include_tilemaps = true,
 	var folder_path = GlobalEditor.project_data_folder.path_join(project_name_normalized)
 	
 	if is_loading_embeded:
-		# Replaces 'user://' with 'res://' in the base path
 		folder_path = folder_path.replace(GlobalEditor.project_data_folder, GlobalEditor.embeded_level_folder)
 		print_rich("[color=cyan]EMBEDDED LOAD ACTIVE:[/color] Path redirected to res://")
 	
@@ -177,18 +179,14 @@ func Call_Project_Load(project_name_normalized: String, include_tilemaps = true,
 		if FileAccess.file_exists(main_tiles_path):
 			var main_file = FileAccess.open(main_tiles_path, FileAccess.READ)
 			if main_file:
-				var loaded_main_tiles: Array[TileDataResource] = []
-				var raw_data = main_file.get_var(true) # Save to a temp variable first
-				
-				# CRITICAL CHECK: Make sure raw_data isn't null and is actually an array
-				if raw_data != null and typeof(raw_data) == TYPE_ARRAY:
-					loaded_main_tiles.assign(raw_data)
-					tilemap_array_main = loaded_main_tiles
+				var raw_data = main_file.get_var(true) 
+				# CHANGED: Check for TYPE_PACKED_BYTE_ARRAY
+				if typeof(raw_data) == TYPE_PACKED_BYTE_ARRAY:
+					tilemap_array_main = raw_data
 					print_rich("Main Tilemap loaded [color=lime]successfully!")
 				else:
-					push_error("Main Tilemap save file is corrupted. Starting fresh.")
+					push_error("Main Tilemap save file is incompatible or corrupted. Starting fresh.")
 					tilemap_array_main.clear()
-					
 				main_file.close()
 		else:
 			print_rich("[color=yellow]No Main Tilemap file found. [/color]Starting fresh.")
@@ -199,34 +197,21 @@ func Call_Project_Load(project_name_normalized: String, include_tilemaps = true,
 		if FileAccess.file_exists(bg_tiles_path):
 			var bg_file = FileAccess.open(bg_tiles_path, FileAccess.READ)
 			if bg_file:
-				var loaded_bg_tiles: Array[TileDataResource] = []
 				var raw_data = bg_file.get_var(true)
-				
-				if raw_data != null and typeof(raw_data) == TYPE_ARRAY:
-					loaded_bg_tiles.assign(raw_data)
-					tilemap_array_bg = loaded_bg_tiles
+				if typeof(raw_data) == TYPE_PACKED_BYTE_ARRAY:
+					tilemap_array_bg = raw_data
 					print_rich("Background Tilemap loaded [color=lime]successfully!")
 				else:
-					push_error("Background Tilemap save file is corrupted. Starting fresh.")
+					push_error("Background Tilemap save file is incompatible or corrupted. Starting fresh.")
 					tilemap_array_bg.clear()
-					
 				bg_file.close()
 		else:
 			print_rich("[color=yellow]No Background Tilemap file found. [/color] Starting fresh.")
 			tilemap_array_bg.clear()
 
-
-func Call_Save_TileMapLayer_As_Array(layer_node: TileMapLayer, is_main_tilemap: bool = true) -> Array[TileDataResource]:
-	var data_array: Array[TileDataResource] = []
-	var cells = layer_node.get_used_cells()
-	
-	for cell in cells:
-		var tile = TileDataResource.new()
-		tile.local_coords = cell
-		tile.source_id = layer_node.get_cell_source_id(cell) 
-		tile.atlas_coords = layer_node.get_cell_atlas_coords(cell)
-		tile.alternative_tile = layer_node.get_cell_alternative_tile(cell)
-		data_array.append(tile)
+# CHANGED: Gets the pure binary data natively from Godot (instantly fast)
+func Call_Save_TileMapLayer_As_Array(layer_node: TileMapLayer, is_main_tilemap: bool = true) -> PackedByteArray:
+	var data_array: PackedByteArray = layer_node.get_tile_map_data_as_array()
 	
 	if is_main_tilemap:
 		tilemap_array_main = data_array
@@ -236,101 +221,54 @@ func Call_Save_TileMapLayer_As_Array(layer_node: TileMapLayer, is_main_tilemap: 
 	print("Saved Tilemap Data for: ", "Main" if is_main_tilemap else "Background")
 	return data_array
 
-##Load Tilemap Data. 2nd Varable Holds TileDataResource
-func Call_Load_TileMapLayer_Data(layer_node: TileMapLayer, data_array: Array[TileDataResource]):
+# CHANGED: Loads the pure binary data natively back into the map
+func Call_Load_TileMapLayer_Data(layer_node: TileMapLayer, data_array: PackedByteArray):
 	layer_node.clear()
-	
-	for tile in data_array:
-		layer_node.set_cell(tile.local_coords, tile.source_id, tile.atlas_coords, tile.alternative_tile)
+	if not data_array.is_empty():
+		layer_node.set_tile_map_data_from_array(data_array)
 
 ## Exports the entire project to a single .wowlv file for easy sharing
 func Call_Export(project_name_normalized: String = GlobalEditor.project_name_normalized) -> void:
 	var base_export_dir: String
 	
-	# 1. Determine the root export path based on if we are running in the editor or an exported build
 	if OS.has_feature("editor"):
-		# Globalize path converts user:// into the actual OS AppData path on the user's computer
 		base_export_dir = ProjectSettings.globalize_path("user://Export")
 	else:
-		# Get the folder where the .exe is located AND append the specific "WoW Exports" parent folder
 		base_export_dir = OS.get_executable_path().get_base_dir().path_join("WoW Exports")
 		
-		
-	# 2. Append the specific project's folder to the base directory
 	var export_folder = base_export_dir.path_join(project_name_normalized)
-	
-	# 3. Create the directory safely
 	DirAccess.make_dir_recursive_absolute(export_folder)
 	
-	# 4. Form the final filepath for the .wowlv file
 	var path = project_name_normalized if project_name_normalized != "" else "Default_Name"
 	var export_file_path = export_folder.path_join(path + ".wowlv")
 	
-	# 5. Pack Tilemaps into PackedInt32Array for massive filesize reduction (like Godot native .tscn does)
-	var packed_main = _compress_tiles(tilemap_array_main)
-	var packed_bg = _compress_tiles(tilemap_array_bg)
-	
-	# 6. Pack everything into a single dictionary
+	# CHANGED: No need to pack tiles manually anymore, just use the PackedByteArrays directly
 	var export_data = {
 		"project_name": GlobalEditor.project_name, 
+		"project_version": ProjectSettings.get_setting("application/config/version"),
 		"godot_version": Engine.get_version_info(),
+		"time_when_saved": Time.get_date_string_from_system(),
 		"player_spawn": player_spawn,
 		"carrot_locations": carrot_locations,
 		"winzone_location": winzone_location,
 		"deathzone_locations": deathzone_locations,
 		"custom_environment": custom_environment,
 		"custom_environment_call_change_zone": custom_environment_call_change_zone,
-		"tilemap_array_main_packed": packed_main,
-		"tilemap_array_bg_packed": packed_bg
+		"tilemap_array_main_packed": tilemap_array_main, # Just pass them directly
+		"tilemap_array_bg_packed": tilemap_array_bg      # ZSTD will compress these incredibly well
 	}
 	
-	# 7. Save the data with Godot's built-in binary compression (ZSTD) for incredibly tiny files
 	var file = FileAccess.open_compressed(export_file_path, FileAccess.WRITE, FileAccess.COMPRESSION_ZSTD)
 	if file:
 		file.store_var(export_data, true)
 		file.close()
 		print_rich("Project [color=green]successfully[/color] exported as a tiny compressed binary file to: [color=orange]", export_file_path)
-		OS.shell_open("file://" + export_file_path.get_base_dir())
+		if not OS.has_feature("android"):
+			if DisplayServer.clipboard_has():
+				var clipboard_text = DisplayServer.clipboard_get()
+				if clipboard_text != export_file_path: DisplayServer.clipboard_set(export_file_path)
+			else: DisplayServer.clipboard_set(export_file_path) 
+			OS.shell_open("file://" + export_file_path.get_base_dir())
+			DisplayServer.window_request_attention()
 	else:
 		push_error("Failed to export project. Error code: ", FileAccess.get_open_error())
-
-
-#region --- TILEMAP COMPRESSION HELPERS ---
-
-## Converts the bulky Object array into a highly compact raw Int array (similar to native Godot scenes)
-func _compress_tiles(tile_array: Array[TileDataResource]) -> PackedInt32Array:
-	var packed = PackedInt32Array()
-	# Pre-allocate array size: 6 integers per tile 
-	# (local_x, local_y, source_id, atlas_x, atlas_y, alt_tile)
-	packed.resize(tile_array.size() * 6)
-	
-	var i = 0
-	for tile in tile_array:
-		packed[i] = tile.local_coords.x
-		packed[i+1] = tile.local_coords.y
-		packed[i+2] = tile.source_id
-		packed[i+3] = tile.atlas_coords.x
-		packed[i+4] = tile.atlas_coords.y
-		packed[i+5] = tile.alternative_tile
-		i += 6
-		
-	return packed
-
-## Example helper for when you make your Call_Import() function later to unpack the arrays back into objects
-func _uncompress_tiles(packed: PackedInt32Array) -> Array[TileDataResource]:
-	var tile_array: Array[TileDataResource] = []
-	var i = 0
-	
-	while i < packed.size():
-		var tile = TileDataResource.new()
-		tile.local_coords = Vector2i(packed[i], packed[i+1])
-		tile.source_id = packed[i+2]
-		tile.atlas_coords = Vector2i(packed[i+3], packed[i+4])
-		tile.alternative_tile = packed[i+5]
-		
-		tile_array.append(tile)
-		i += 6
-		
-	return tile_array
-
-#endregion
