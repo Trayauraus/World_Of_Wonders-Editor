@@ -23,7 +23,11 @@ func populate_recent_projects():
 			
 		# Construct paths to verify existence
 		var safe_name = get_safe_filename(meta.project_name)
-		var project_folder_path = "user://Project Data/" + safe_name
+		var base_path = "user://Project Data/"
+		if not OS.has_feature("pc"):
+			var base_path_beginning = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+			base_path = base_path_beginning.path_join("WoW Projects/")
+		var project_folder_path = base_path + safe_name
 		var dat_file_path = project_folder_path + "/project_data.dat"
 		
 		# Check if directory AND the dat file still exist

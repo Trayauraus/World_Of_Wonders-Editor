@@ -11,6 +11,11 @@ var temp_name_hold = ""
 func _ready():
 	OS.set_low_processor_usage_mode(true)
 	GlobalProject.is_loading_embeded = false
+	
+	# FIX: Ask for permissions immediately on boot so config and recents can load seamlessly
+	if OS.has_feature("android"):
+		OS.request_permissions()
+		
 	GlobalEditor.Call_Config_Load()
 	
 	create_project_folder()
@@ -18,12 +23,16 @@ func _ready():
 	await get_tree().process_frame
 	create_recent_project_list()
 
-func  create_project_folder():
+func create_project_folder():
 	var folder_path = GlobalEditor.project_data_folder
-	var dir = DirAccess.open("user://")
 	
-	if not dir.dir_exists(folder_path):
-		var error = dir.make_dir_recursive(folder_path)
+	# FIX: Properly set the target path to Mobile Documents if on mobile
+	if OS.has_feature("android") or OS.has_feature("ios"):
+		var docs_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		folder_path = docs_dir.path_join("WoW Projects")
+		
+	if not DirAccess.dir_exists_absolute(folder_path):
+		var error = DirAccess.make_dir_recursive_absolute(folder_path)
 		if error == OK:
 			print("Created folder: ", folder_path)
 		else:

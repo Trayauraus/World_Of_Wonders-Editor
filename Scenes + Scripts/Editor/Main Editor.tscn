@@ -27,6 +27,11 @@
 [ext_resource type="Script" uid="uid://7p6t85y5ix66" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control_Buttons - Options.gd" id="19_l3pgt"]
 [ext_resource type="Script" uid="uid://b158g5d2se6xo" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Control_Buttons - Export.gd" id="19_sa5po"]
 [ext_resource type="Script" uid="uid://bwjaf5recme1f" path="res://Scenes + Scripts/Editor/Boot/Helper Scripts/Helper - Project Open Adder.gd" id="20_i2dkp"]
+[ext_resource type="Texture2D" uid="uid://cveqdwr618ftw" path="res://Assets/Light Gradient/Rounded Light Gradient.tres" id="20_skt1f"]
+[ext_resource type="Script" uid="uid://charvnt0ucpny" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Soundtrack Selector.gd" id="21_eemy6"]
+[ext_resource type="Script" uid="uid://c76lmqb5vwd0e" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Scroll Remover.gd" id="21_y0ft1"]
+[ext_resource type="Script" uid="uid://cqsq1ticaosiy" path="res://Scenes + Scripts/Editor/Helper - World Variables.gd" id="22_k0m6g"]
+[ext_resource type="Script" uid="uid://dbvgl6oiaxors" path="res://Scenes + Scripts/Editor/Helper Scripts/Helper - Camera Visualizer.gd" id="22_sqy6l"]
 
 [sub_resource type="Theme" id="Theme_6xpy4"]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -78,6 +83,33 @@ corner_radius_bottom_left = 6
 corner_detail = 2
 shadow_color = Color(0, 0, 0, 0.717647)
 shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skt1f"]
+bg_color = Color(0.51663965, 0.18480927, 9.62615e-08, 1)
+border_width_left = 7
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 7
+border_color = Color(0.14410743, 0.050358593, 0.03846677, 1)
+border_blend = true
+corner_detail = 2
+expand_margin_right = 1.0
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0m6g"]
+bg_color = Color(0.83827734, 0.3214537, 1.92523e-07, 1)
+border_width_left = 7
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 7
+border_color = Color(0.14410743, 0.050358593, 0.03846677, 1)
+border_blend = true
+corner_detail = 2
+expand_margin_right = 1.0
+shadow_size = 9
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_y0ft1"]
+color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ancft"]
 shader = ExtResource("15_ksenb")
@@ -279,7 +311,7 @@ shader_parameter/position = 0.5
 shader_parameter/color_angle = 1.565
 shader_parameter/stepIntensify = 10
 
-[node name="Editor" type="Control" unique_id=1550646374 node_paths=PackedStringArray("environment", "background", "player", "editor_camera", "main_tilemap", "bg_tilemap", "main_layer_checkbox", "rectangle_tool_checkbox", "environment_options", "tool_list", "tool_label", "err_panel", "err_timer", "err_text")]
+[node name="Editor" type="Control" unique_id=1550646374 node_paths=PackedStringArray("environment", "background", "player", "editor_camera", "main_tilemap", "bg_tilemap", "main_layer_checkbox", "rectangle_tool_checkbox", "eraser_checkbox", "undo_button", "redo_button", "rotate_button", "mirror_button", "mobile_button_vseperator", "environment_options", "tool_list", "tool_label", "world_properties_list", "property_list", "object_container", "err_panel", "err_timer", "err_text") groups=["Editor"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -295,10 +327,23 @@ main_tilemap = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportCon
 bg_tilemap = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/BG Tileset")
 main_layer_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Main_Tilemap")
 rectangle_tool_checkbox = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/Rectangle_Tool")
+eraser_checkbox = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Eraser")
+undo_button = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Undo")
+redo_button = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Redo")
+rotate_button = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Rotate")
+mirror_button = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Mirror")
+mobile_button_vseperator = NodePath("VSplitContainer/ControlContainer/HBoxContainer/Mobile Seperator")
 tileset_source_id = 4
-environment_options = NodePath("VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List/OptionButton")
+environment_options = NodePath("VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List/OptionButton")
 tool_list = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox")
 tool_label = NodePath("VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Header/Header_SubLabel")
+world_properties_list = NodePath("VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List")
+property_list = NodePath("VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Changeable_Property_List")
+carrot_texture = ExtResource("9_r1k6a")
+coin_texture = ExtResource("13_v5tc5")
+enemy_texture = ExtResource("15_wrdkv")
+light_texture = ExtResource("20_skt1f")
+object_container = NodePath("VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Placed Objects")
 err_panel = NodePath("Error Panel")
 err_timer = NodePath("Error Panel/Err_Timeout_Timer")
 err_text = NodePath("Error Panel/Error Message")
@@ -347,6 +392,50 @@ text = "Export"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Help"
+
+[node name="VSeparator" type="VSeparator" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1825980095]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
+
+[node name="Eraser" type="CheckBox" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=293858316]
+layout_mode = 2
+text = "Eraser"
+flat = true
+
+[node name="Rotate" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=2006402061]
+visible = false
+layout_mode = 2
+text = "Rotate"
+
+[node name="Mobile Seperator" type="VSeparator" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=1412358143]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
+
+[node name="Mirror" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=33282449]
+visible = false
+layout_mode = 2
+text = "Mirror"
+
+[node name="VSeparator2" type="VSeparator" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=2080839005]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
+
+[node name="Undo" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=2091561063]
+layout_mode = 2
+text = "Undo"
+
+[node name="VSeparator3" type="VSeparator" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=384655182]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xr8lh")
+
+[node name="Redo" type="Button" parent="VSplitContainer/ControlContainer/HBoxContainer" unique_id=78825399]
+layout_mode = 2
+text = "Redo"
 
 [node name="Properties_Label_Container" type="HBoxContainer" parent="VSplitContainer/ControlContainer" unique_id=1604582168]
 layout_mode = 2
@@ -542,7 +631,7 @@ size_flags_vertical = 3
 [node name="Special_Label" type="Label" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=800408308]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
-text = "Special"
+text = "Tilemap"
 horizontal_alignment = 1
 
 [node name="Main_Tilemap" type="CheckButton" parent="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List" unique_id=218274769]
@@ -592,12 +681,15 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("2_22iwr")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="VSplitContainer/HSplitContainer/Viewport" unique_id=969735433]
+texture_filter = 1
 layout_mode = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer" unique_id=254111710]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(772, 593)
+msaa_2d = 2
+size = Vector2i(767, 593)
 render_target_update_mode = 4
 
 [node name="Main_Scene" type="Node2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport" unique_id=1002988290]
@@ -615,9 +707,14 @@ texture = ExtResource("11_ffsf6")
 region_enabled = true
 region_rect = Rect2(35, 4, 24, 26)
 
+[node name="PlayerLight" type="PointLight2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene/Player - Bunny Sprite" unique_id=839599006]
+texture = ExtResource("20_skt1f")
+
 [node name="Main Tileset" type="TileMapLayer" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=955918570]
 texture_filter = 1
 tile_set = ExtResource("2_80e1c")
+
+[node name="Placed Objects" type="Node2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport/Main_Scene" unique_id=1282064634]
 
 [node name="Editor_Viewport_Camera" type="Camera2D" parent="VSplitContainer/HSplitContainer/Viewport/SubViewportContainer/SubViewport" unique_id=470025141]
 limit_enabled = false
@@ -636,6 +733,7 @@ theme_override_styles/panel = ExtResource("4_6xpy4")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/HSplitContainer/PropertyList" unique_id=1700800206]
 layout_mode = 2
+script = ExtResource("21_y0ft1")
 
 [node name="ScrollContent" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer" unique_id=939104730]
 layout_mode = 2
@@ -644,20 +742,34 @@ size_flags_horizontal = 3
 [node name="Header" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=1688170517]
 layout_mode = 2
 
+[node name="Selected Property Name" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Header" unique_id=1502829366]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8509804, 0.5176471, 0.4627451, 1)
+text = "World Defaults"
+horizontal_alignment = 1
+
 [node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Header" unique_id=1911897471]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="List" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=490437870]
+[node name="World_List" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=490437870 node_paths=PackedStringArray("default_cave_button", "ice_physics_button", "force_light_button", "player_light")]
 layout_mode = 2
+script = ExtResource("22_k0m6g")
+default_cave_button = NodePath("Default_Cave_Property")
+ice_physics_button = NodePath("Ice_Physics_Property")
+force_light_button = NodePath("Force_Light_Property")
+player_light = NodePath("../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/Player - Bunny Sprite/PlayerLight")
 
-[node name="Environment_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=69729082]
+[node name="Environment_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=69729082]
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Environment"
 horizontal_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=468507029]
+[node name="OptionButton" type="OptionButton" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=468507029]
 layout_mode = 2
+tooltip_text = "None is visually off in editor.
+If none is selected and level is exported, it will default to \"Lava\" in WoW."
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_l3pgt")
 selected = 0
@@ -675,159 +787,155 @@ popup/item_4/id = 4
 popup/item_5/text = "Grass"
 popup/item_5/id = 5
 
-[node name="HSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1427258595]
+[node name="Default_Cave_Property" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=1959061579]
+layout_mode = 2
+tooltip_text = "Makes level start out as cave."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+toggle_mode = true
+text = "Default Cave"
+
+[node name="Zoom_Amt" type="SpinBox" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=1396176169 node_paths=PackedStringArray("player_sprite")]
+layout_mode = 2
+tooltip_text = "Camera Zoom"
+mouse_default_cursor_shape = 1
+max_value = 256.0
+step = 0.1
+value = 2.4
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+prefix = "Zoom:"
+script = ExtResource("22_sqy6l")
+player_sprite = NodePath("../../../../../Viewport/SubViewportContainer/SubViewport/Main_Scene/Player - Bunny Sprite")
+
+[node name="WSSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=908385885]
 layout_mode = 2
 theme_override_constants/separation = 16
+theme_override_styles/separator = SubResource("StyleBoxLine_y0ft1")
 
-[node name="Selected_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=719639798]
+[node name="Level Soundtrack" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=451182538]
 layout_mode = 2
-text = "Selected"
+theme_override_font_sizes/font_size = 14
+text = "🎵 No Song"
 horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="Property_Button" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2079566296]
+[node name="Level Soundtrack Select" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=1768282114 node_paths=PackedStringArray("level_soundtrack_label")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+text = "Choose Song"
+script = ExtResource("21_eemy6")
+level_soundtrack_label = NodePath("../Level Soundtrack")
+
+[node name="PSeparator" type="HSeparator" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=151289809]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Player_Label" type="Label" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=87181926]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85208243, 0.519294, 0.46271312, 1)
+text = "Player Defaults"
+horizontal_alignment = 1
+
+[node name="Dash_Count" type="SpinBox" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=331994851]
+layout_mode = 2
+mouse_default_cursor_shape = 1
+max_value = 256.0
+value = 2.0
+allow_greater = true
+alignment = 1
+update_on_text_changed = true
+prefix = "Dashes:"
+
+[node name="Ice_Physics_Property" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=2079566296]
+layout_mode = 2
+tooltip_text = "Bunny has ice physics."
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.6981115, 0, 0.18467814, 1)
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+toggle_mode = true
+text = "Ice Physics"
+
+[node name="Force_Light_Property" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List" unique_id=455959985]
+layout_mode = 2
+tooltip_text = "Forces Bunny to ALWAYS have light around them.
+By default it is caves only."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
+theme_override_styles/disabled = ExtResource("2_s276o")
+theme_override_styles/focus = ExtResource("2_s276o")
+toggle_mode = true
+text = "Force Light"
+expand_icon = true
+
+[node name="Changeable_Property_List" type="VBoxContainer" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent" unique_id=1898026194]
+visible = false
+layout_mode = 2
+
+[node name="Property_Button" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Changeable_Property_List" unique_id=1426252724]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("2_s276o")
+theme_override_styles/pressed = ExtResource("7_6my6d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
 theme_override_styles/disabled = ExtResource("2_s276o")
 theme_override_styles/focus = ExtResource("2_s276o")
 text = "Property 1"
 
-[node name="Property_Button2" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1768282114]
+[node name="Property_Button2" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Changeable_Property_List" unique_id=316338910]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
 theme_override_styles/disabled = ExtResource("2_s276o")
 theme_override_styles/focus = ExtResource("2_s276o")
 text = "Property 2"
 
-[node name="Property_Button3" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=455959985]
+[node name="Property_Button3" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Changeable_Property_List" unique_id=1437549906]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
 theme_override_styles/disabled = ExtResource("2_s276o")
 theme_override_styles/focus = ExtResource("2_s276o")
 text = "Property 3"
-expand_icon = true
 
-[node name="Property_Button4" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1959061579]
+[node name="Property_Button4" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/Changeable_Property_List" unique_id=1435194362]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = ExtResource("2_s276o")
 theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skt1f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_k0m6g")
 theme_override_styles/disabled = ExtResource("2_s276o")
 theme_override_styles/focus = ExtResource("2_s276o")
 text = "Property 4"
-
-[node name="Property_Button5" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1426252724]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 5"
-
-[node name="Property_Button6" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=316338910]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 6"
-
-[node name="Property_Button7" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1437549906]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 7"
-
-[node name="Property_Button8" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1435194362]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 8"
-
-[node name="Property_Button9" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=850015913]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 9"
-
-[node name="Property_Button10" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=585271025]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 10"
-expand_icon = true
-
-[node name="Property_Button11" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=2000299052]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 11"
-
-[node name="Property_Button12" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=933418337]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 12"
-
-[node name="Property_Button13" type="Button" parent="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List" unique_id=1853178689]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = ExtResource("2_s276o")
-theme_override_styles/pressed = ExtResource("7_6my6d")
-theme_override_styles/hover = ExtResource("2_s276o")
-theme_override_styles/hover_pressed = ExtResource("2_s276o")
-theme_override_styles/disabled = ExtResource("2_s276o")
-theme_override_styles/focus = ExtResource("2_s276o")
-text = "Property 13"
 
 [node name="Control_Menu_Dropdown" type="Control" parent="." unique_id=728104496]
 visible = false
@@ -1264,7 +1372,7 @@ energy = 0.3
 [connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Export_Button" to="VSplitContainer/ControlContainer" method="_on_export_button_pressed"]
 [connection signal="pressed" from="VSplitContainer/ControlContainer/HBoxContainer/Help_Button" to="VSplitContainer/ControlContainer" method="_on_help_button_pressed"]
 [connection signal="item_selected" from="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Tool_List_VBox/Tileset_Options" to="VSplitContainer/HSplitContainer/ToolList/ScrollContainer/ScrollContent/Special_List/ScrollContainer/TileGridContainer" method="Tilemap_Selected"]
-[connection signal="item_selected" from="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/List/OptionButton" to="." method="Call_Environment_Change"]
+[connection signal="item_selected" from="VSplitContainer/HSplitContainer/PropertyList/ScrollContainer/ScrollContent/World_List/OptionButton" to="." method="Call_Environment_Change"]
 [connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/Top_Container/Back_Button" to="VSplitContainer/ControlContainer" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/New_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_New_Project"]
 [connection signal="pressed" from="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container/VBoxContainer/Open_Button" to="Control_Menu_Dropdown/Panel/Control_Menu_Container/HSplitContainer/File Container" method="Call_Open_Project"]

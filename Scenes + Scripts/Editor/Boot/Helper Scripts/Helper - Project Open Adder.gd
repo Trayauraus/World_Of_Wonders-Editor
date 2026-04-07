@@ -19,7 +19,19 @@ func load_project_buttons() -> void:
 		
 	# Clean the path to prevent trailing slash issues in the virtual filesystem
 	var safe_dir_path = PROJECT_DATA_DIR.trim_suffix("/")
+	
+	
+	if not enable_embeded_only and (OS.has_feature("android") or OS.has_feature("ios")):
+		if OS.has_feature("android"):
+			OS.request_permissions()
+		var docs_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		safe_dir_path = docs_dir.path_join("WoW Projects")
 		
+		# Ensure directory exists so we don't get open errors
+		if not DirAccess.dir_exists_absolute(safe_dir_path):
+			DirAccess.make_dir_recursive_absolute(safe_dir_path)
+	
+	
 	# 2. Open the Project Data directory
 	var dir = DirAccess.open(safe_dir_path)
 	if dir:

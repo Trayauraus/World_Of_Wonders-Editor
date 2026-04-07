@@ -1,3 +1,4 @@
+#Called Via GlobalEditor
 ##Global - Editor.gd
 extends Node
 
